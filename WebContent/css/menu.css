@@ -1,0 +1,69 @@
+@CHARSET "UTF-8";
+
+.footer{
+	height:10%;
+	width:100%;
+	bottom:0;
+	position:absolute;
+}
+
+#imgLogo{
+	width:10%; 
+	float:right;
+}
+
+#buttonMenu{
+	height:80%;
+	width:25%;
+	display: ;
+}
+
+#emergency{
+	background-color: orange;
+}
+
+#recipes{
+	background-color: blue;
+}
+
+#shop{
+	background-color: green;
+}
+
+.buttonClick{
+
+	display:block;
+	width:100%;
+	height:100%;
+}
+
+label
+
+{
+    display: block;
+    width: 150px;
+    float: left;
+}
+
+#createUserForm{
+	padding:20px;
+	padding-bottom:45px;
+	border-style: solid;
+	margin-left: auto;
+  	margin-right: auto;
+  	width: 400px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+
+#submitUserCreate{
+	margin-top:10px;
+	float:right;
+}
+
+
+#cancelUserCreate{
+	margin-top:10px;
+	float:left;
+}

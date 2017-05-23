@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta charset="UTF-8" />
+	<title><ui:insert name="sectionTitle">Default Section Title</ui:insert>
+	</title>
+	<link rel="stylesheet" href="../css/styleTemplate.css" />
+	<link rel="stylesheet" href="../css/menu.css" />
+	<link rel="stylesheet" href="../css/general.css" />
+</h:head>
+<h:body>
+
+	<div class="header">
+		<ui:insert name="sectionHeaderActivity">Default Section Header</ui:insert>
+		<div id="headerIdentification">
+			<a href="../composite/createUser.jsf"> <img src="../img/plus.jpg" alt="+" height="20px"
+				width="20px" /> Become a Member </a>
+			<FORM action="">
+				<h:inputText id="login" name="login"></h:inputText>
+				<h:inputSecret id="pwd" name="pwd"></h:inputSecret>
+				<h:button id="submit" name="submit" value="=>"></h:button>
+			</FORM>
+		</div>
+	</div>
+
+	<div class="content">
+		<ui:insert name="sectionContent">Default Section Content</ui:insert>
+	</div>
+
+	<div class="footer">
+		<span id="copyright">Copyright 2013 all right reserved</span> <img
+			src="../img/background.jpeg" alt="Smiley face" id="imgLogo" />
+	</div>
+</h:body>
+</html>
