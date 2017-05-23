@@ -40,4 +40,7 @@ ADD FOREIGN KEY (idReceipe) REFERENCES RECEIPE(id);
 ALTER TABLE NOTE
 ADD idUser int not null;
 
+Alter table NOTE
+ADD FOREIGN key (idUser) REFERENCES USERS (id);
+
 
