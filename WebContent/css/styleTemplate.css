@@ -1,0 +1,36 @@
+@CHARSET "UTF-8";
+
+.header{
+	height:20%;
+	margin-bottom:55px;
+	display: list-item;
+}
+
+.footer{
+	height:10%;
+	width:100%;
+	bottom:0;
+	position:absolute;
+}
+
+.content{
+	height:70%;
+	margin-bottom:25px;
+}
+
+#imgLogo{
+	width:10%; 
+	float:right;
+}
+
+#copyright{
+	 float:left;
+}
+
+#headerActivity{
+	float:left;
+}
+
+#headerIdentification{
+	float:right;
+}

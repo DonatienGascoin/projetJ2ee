@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../template/template.xhtml">
+	<ui:define name="sectionTitle">
+Creation User
+</ui:define>
+
+	<ui:define name="sectionHeaderActivity">
+		<div id="headerActivity" style="background-color: orange">
+			Emergency</div>
+	</ui:define>
+
+	<ui:define name="sectionContent">
+		<div id="createUserForm">
+			<form id="createUser">
+				<label>First Name : </label>
+				<h:inputText id="firstname" name="firstname"></h:inputText>
+				<label>Last Name : </label>
+				<h:inputText id="lastname" name="lastname"></h:inputText>
+				<label>Age : </label>
+				<h:inputText id="age" name="age"></h:inputText>
+				<label>Mail : </label>
+				<h:inputText id="mail" name="mail"></h:inputText>
+				<label>Login : </label>
+				<h:inputText id="login" name="login"></h:inputText>
+				<label>Password : </label>
+				<h:inputSecret id="pwd" name="pwd"></h:inputSecret>
+				<label>Password 2 : </label>
+				<h:inputSecret id="pwd2" name="pwd2"></h:inputSecret>
+				<br/>
+				<h:button id="submitUserCreate" name="submitUserCreate" value="Register"></h:button>
+			</form>
+			<a href="../menu.jsf"><h:button id="cancelUserCreate" name="cancelUserCreate" value="Cancel"></h:button></a>
+		</div>
+	</ui:define>
+
+</ui:composition>
