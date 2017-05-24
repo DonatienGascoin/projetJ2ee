@@ -1,9 +1,13 @@
 package com.j2ee.project.bean;
 
+import java.io.Serializable;
 import javax.faces.bean.RequestScoped;
 
+import javax.faces.bean.ManagedBean;
+
 @RequestScoped
-public class NoteBean {
+@ManagedBean
+public class NoteBean implements Serializable {
 
 	private int id;
 	private int idReceipe;

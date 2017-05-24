@@ -1,11 +1,12 @@
 package com.j2ee.project.bean;
 
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 @ManagedBean
 @RequestScoped
-public class ReceipeBean {
+public class ReceipeBean implements Serializable{
 
 	private int id;
 	private String name;
@@ -106,7 +107,7 @@ public class ReceipeBean {
 	public String getImage() {
 		return image;
 	}
-
+	
 	public void setImage(String image) {
 		this.image = image;
 	}
