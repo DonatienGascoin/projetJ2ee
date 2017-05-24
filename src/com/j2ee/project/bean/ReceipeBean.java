@@ -9,11 +9,12 @@ public class ReceipeBean {
 	private int nbPersons;
 	private int complexity;
 	private String type;
+	private String image;
 
 	public ReceipeBean() {
 	}
 
-	public ReceipeBean(String name, String details, String resume, int nbPersons, int complexity, String type) {
+	public ReceipeBean(String name, String details, String resume, int nbPersons, int complexity, String type, String image) {
 		super();
 		this.name = name;
 		this.details = details;
@@ -21,9 +22,10 @@ public class ReceipeBean {
 		this.nbPersons = nbPersons;
 		this.complexity = complexity;
 		this.type = type;
+		this.image=image;
 	}
 
-	public ReceipeBean(int id, String name, String details, String resume, int nbPersons, int complexity, String type) {
+	public ReceipeBean(int id, String name, String details, String resume, int nbPersons, int complexity, String type, String image) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -32,6 +34,7 @@ public class ReceipeBean {
 		this.nbPersons = nbPersons;
 		this.complexity = complexity;
 		this.type = type;
+		this.image=image;
 	}
 
 	public int getId() {
@@ -90,10 +93,20 @@ public class ReceipeBean {
 		this.type = type;
 	}
 
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	@Override
 	public String toString() {
-		return "ReceipeBean [id=" + id + ", name=" + name + ", details=" + details + ", resume=" + resume
-				+ ", nbPersons=" + nbPersons + ", complexity=" + complexity + ", type=" + type + "]";
+		return "ReceipeBean [id=" + id + ", name=" + name + ", details="
+				+ details + ", resume=" + resume + ", nbPersons=" + nbPersons
+				+ ", complexity=" + complexity + ", type=" + type + ", image="
+				+ image + "]";
 	}
 
 }

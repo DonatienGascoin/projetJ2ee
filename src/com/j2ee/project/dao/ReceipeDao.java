@@ -26,7 +26,7 @@ public class ReceipeDao extends Dao {
 		return userDao;
 	}
 
-	public boolean add(String name, String details, String resume, int nbPersons, int complexity, String type) {
+	public boolean add(String name, String details, String resume, int nbPersons, int complexity, String type, String image) {
 		boolean result = false;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -43,6 +43,7 @@ public class ReceipeDao extends Dao {
 			querySt.setInt(4, nbPersons);
 			querySt.setInt(5, complexity);
 			querySt.setString(6, type);
+			querySt.setString(7, image);
 
 			// Exécution
 			int rs = querySt.executeUpdate();
@@ -61,7 +62,7 @@ public class ReceipeDao extends Dao {
 	}
 
 	public boolean edit(int id, String name, String details, String resume, int nbPersons, int complexity,
-			String type) {
+			String type, String image) {
 		boolean result = false;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -79,8 +80,9 @@ public class ReceipeDao extends Dao {
 			querySt.setInt(4, nbPersons);
 			querySt.setInt(5, complexity);
 			querySt.setString(6, type);
+			querySt.setString(7, image);
 			// Where clause
-			querySt.setInt(7, id);
+			querySt.setInt(8, id);
 
 			// Execution
 			int rs = querySt.executeUpdate();
@@ -144,7 +146,7 @@ public class ReceipeDao extends Dao {
 			conn = DriverManager.getConnection(url, user, passwd);
 
 			PreparedStatement querySt = conn
-					.prepareStatement(Request.SELECT_USER.getQuery());
+					.prepareStatement(Request.SELECT_RECEIPT.getQuery());
 			querySt.setInt(1, id);
 
 			ResultSet rs = querySt.executeQuery();

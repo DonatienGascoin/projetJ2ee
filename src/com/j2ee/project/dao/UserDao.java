@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.j2ee.project.bean.UserBean;
@@ -27,7 +26,7 @@ public class UserDao extends Dao {
 		return userDao;
 	}
 
-	public boolean add(String firstName, String lastName, Date birthdate,
+	public boolean add(String firstName, String lastName, int age,
 			String login, String email, String password) {
 		boolean result = false;
 		try {
@@ -46,7 +45,7 @@ public class UserDao extends Dao {
 			querySt.setString(3, login);
 			querySt.setString(4, password);
 			querySt.setString(5, email);
-			querySt.setDate(6, new java.sql.Date(birthdate.getTime()));
+			querySt.setInt(6, age);
 
 			// Exécution
 			int rs = querySt.executeUpdate();
@@ -64,9 +63,8 @@ public class UserDao extends Dao {
 		return result;
 	}
 
-	public boolean edit(int id, String firstName, String lastName,
-			Date birthdate, String login, String email, String password,
-			boolean administrator) {
+	public boolean edit(int id, String firstName, String lastName, int age,
+			String login, String email, String password, boolean administrator) {
 		boolean result = false;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -84,7 +82,7 @@ public class UserDao extends Dao {
 			querySt.setString(3, login);
 			querySt.setString(4, password);
 			querySt.setString(5, email);
-			querySt.setDate(6, new java.sql.Date(birthdate.getTime()));
+			querySt.setInt(6, age);
 			querySt.setBoolean(7, administrator);
 			// Where clause
 			querySt.setInt(8, id);
@@ -123,7 +121,7 @@ public class UserDao extends Dao {
 				user.setId(rs.getInt("id"));
 				user.setFirstName(rs.getString("firstName"));
 				user.setLastName(rs.getString("lastName"));
-				user.setBirthdate(rs.getDate("birthdate"));
+				user.setAge(rs.getInt("age"));
 				user.setEmail(rs.getString("email"));
 				user.setAdministrator(rs.getBoolean("administrator"));
 
@@ -162,10 +160,48 @@ public class UserDao extends Dao {
 				userB.setId(rs.getInt("id"));
 				userB.setFirstName(rs.getString("firstName"));
 				userB.setLastName(rs.getString("lastName"));
-				userB.setBirthdate(rs.getDate("birthdate"));
+				userB.setAge(rs.getInt("age"));
 				userB.setEmail(rs.getString("email"));
 				userB.setAdministrator(rs.getBoolean("administrator"));
 
+			}
+
+			rs.close();
+			querySt.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return userB;
+	}
+
+	public UserBean connectUser(String firstName, String lastName) {
+		UserBean userB = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+
+			Connection conn;
+			conn = DriverManager.getConnection(url, user, passwd);
+
+			PreparedStatement querySt = conn
+					.prepareStatement(Request.EXIST_USER.getQuery());
+			// Définition de la valeur des paramètres
+			querySt.setString(1, firstName);
+			querySt.setString(2, lastName);
+
+			ResultSet rs = querySt.executeQuery();
+			// Only one result
+			if (rs.next()) {
+				userB = new UserBean();
+				userB.setId(rs.getInt("id"));
+				userB.setFirstName(rs.getString("firstName"));
+				userB.setLastName(rs.getString("lastName"));
+				userB.setAge(rs.getInt("age"));
+				userB.setEmail(rs.getString("email"));
+				userB.setAdministrator(rs.getBoolean("administrator"));
 			}
 
 			rs.close();

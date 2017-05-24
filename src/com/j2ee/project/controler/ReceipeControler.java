@@ -10,8 +10,9 @@ public class ReceipeControler {
 	public boolean addReceipt(ReceipeBean receipe) {
 		ReceipeDao receipeDao = ReceipeDao.getInstance();
 
-		boolean rs = receipeDao.add(receipe.getName(), receipe.getDetails(), receipe.getResume(),
-				receipe.getNbPersons(), receipe.getComplexity(), receipe.getType());
+		boolean rs = receipeDao.add(receipe.getName(), receipe.getDetails(),
+				receipe.getResume(), receipe.getNbPersons(),
+				receipe.getComplexity(), receipe.getType(), receipe.getImage());
 
 		return rs;
 	}
@@ -19,13 +20,15 @@ public class ReceipeControler {
 	public boolean editReceipe(ReceipeBean receipe) {
 		ReceipeDao receipeDao = ReceipeDao.getInstance();
 
-		boolean rs = receipeDao.edit(receipe.getId(), receipe.getName(), receipe.getDetails(), receipe.getResume(),
-				receipe.getNbPersons(), receipe.getComplexity(), receipe.getType());
+		boolean rs = receipeDao.edit(receipe.getId(), receipe.getName(),
+				receipe.getDetails(), receipe.getResume(),
+				receipe.getNbPersons(), receipe.getComplexity(),
+				receipe.getType(), receipe.getImage());
 
 		return rs;
 	}
 
-	public List<ReceipeBean> getAllReceipts() {
+	public List<ReceipeBean> getAllReceipes() {
 		ReceipeDao receipeDao = ReceipeDao.getInstance();
 
 		List<ReceipeBean> list = receipeDao.getAll();
@@ -48,10 +51,11 @@ public class ReceipeControler {
 	public static void main(String[] args) {
 
 		ReceipeControler rc = new ReceipeControler();
-		System.out.println(rc.getAllReceipts());
+		System.out.println(rc.getAllReceipes());
 
-		ReceipeBean bean = new ReceipeBean("Crêpes", "Farine + oeuf + lait + bière", "Délicieuse crèpes", 4, 1,
-				"Déssert");
+		ReceipeBean bean = new ReceipeBean("Crepes",
+				"Farine + oeuf + lait + biere", "Delicieuse crepes", 4, 1,
+				"Dessert", "crepes.png");
 		boolean addReceipt = rc.addReceipt(bean);
 		System.out.println("Add receipe: " + addReceipt);
 
@@ -62,7 +66,7 @@ public class ReceipeControler {
 
 		bean = rc.getReceipe(1);
 		System.out.println("User edited:" + bean);
-		System.out.println(rc.getAllReceipts());
+		System.out.println(rc.getAllReceipes());
 
 	}
 }

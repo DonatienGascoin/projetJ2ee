@@ -43,4 +43,9 @@ ADD idUser int not null;
 Alter table NOTE
 ADD FOREIGN key (idUser) REFERENCES USERS (id);
 
+ALTER TABLE binome36.USERS DROP COLUMN birthdate;
+ALTER TABLE binome36.USERS ADD age INT;
+
+ALTER TABLE binome36.RECEIPE ADD image VARCHAR(100);
+
 
