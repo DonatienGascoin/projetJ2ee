@@ -1,5 +1,8 @@
 package com.j2ee.project.bean;
 
+import javax.faces.bean.ManagedBean;
+
+@ManagedBean
 public class ReceipeBean {
 
 	private int id;

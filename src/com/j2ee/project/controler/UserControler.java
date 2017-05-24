@@ -2,25 +2,34 @@ package com.j2ee.project.controler;
 
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.j2ee.project.bean.UserBean;
 import com.j2ee.project.dao.UserDao;
 
+@ManagedBean
 public class UserControler {
 
 	public boolean addUser(UserBean user) {
+		
 		UserDao userDao = UserDao.getInstance();
-
-		boolean rs = userDao.add(user.getFirstName(), user.getLastName(), user.getAge(), user.getLogin(),
-				user.getEmail(), user.getPassword());
-
+		
+		boolean rs = userDao.add(user.getFirstName(), user.getLastName(),
+				user.getAge(), user.getLogin(), user.getEmail(),
+				user.getPassword());
+		
 		return rs;
 	}
 
 	public boolean editUser(UserBean user) {
 		UserDao userDao = UserDao.getInstance();
 
-		boolean rs = userDao.edit(user.getId(), user.getFirstName(), user.getLastName(), user.getAge(),
-				user.getLogin(), user.getEmail(), user.getPassword(), user.isAdministrator());
+		boolean rs = userDao.edit(user.getId(), user.getFirstName(),
+				user.getLastName(), user.getAge(), user.getLogin(),
+				user.getEmail(), user.getPassword(), user.isAdministrator());
 
 		return rs;
 	}
@@ -41,10 +50,10 @@ public class UserControler {
 		return user;
 	}
 
-	public UserBean connectUser(String firstName, String lastName) {
+	public UserBean connectUser(String login, String password) {
 		UserDao userDao = UserDao.getInstance();
 
-		UserBean user = userDao.connectUser(firstName, lastName);
+		UserBean user = userDao.connectUser(login, password);
 
 		return user;
 	}
@@ -55,8 +64,8 @@ public class UserControler {
 	 */
 	public static void main(String[] args) {
 		UserControler uc = new UserControler();
-		UserBean user = new UserBean("Donatien", "Gascoin", 22, "donatien.gascoin@gmail.com", "Dodo",
-				"dodo95");
+		UserBean user = new UserBean("Donatien", "Gascoin", 22,
+				"donatien.gascoin@gmail.com", "Dodo", "dodo95");
 		boolean addUser = uc.addUser(user);
 		System.out.println("User add: " + addUser);
 

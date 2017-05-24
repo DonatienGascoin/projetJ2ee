@@ -17,11 +17,11 @@
 		<div id="headerIdentification">
 			<a href="../composite/createUser.jsf"> <img src="../img/plus.jpg" alt="+" height="20px"
 				width="20px" /> Become a Member </a>
-			<FORM action="">
-				<h:inputText id="login" name="login"></h:inputText>
-				<h:inputSecret id="pwd" name="pwd"></h:inputSecret>
-				<h:button id="submit" name="submit" value="=>"></h:button>
-			</FORM>
+			<h:form id="log">
+				<h:inputText id="login" name="login" value="#{userBean.login}"></h:inputText>
+				<h:inputSecret id="pwd" name="pwd" value="#{userBean.password}"></h:inputSecret>
+				<h:commandButton id="submitLog" name="submitLog" value="=>" action="#{userControler.connectUser(userBean.login, userBean.password)}"></h:commandButton>
+			</h:form>
 		</div>
 	</div>
 

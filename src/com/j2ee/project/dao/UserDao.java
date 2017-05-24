@@ -178,7 +178,7 @@ public class UserDao extends Dao {
 		return userB;
 	}
 
-	public UserBean connectUser(String firstName, String lastName) {
+	public UserBean connectUser(String login, String password) {
 		UserBean userB = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -189,14 +189,16 @@ public class UserDao extends Dao {
 			PreparedStatement querySt = conn
 					.prepareStatement(Request.EXIST_USER.getQuery());
 			// Définition de la valeur des paramètres
-			querySt.setString(1, firstName);
-			querySt.setString(2, lastName);
+			querySt.setString(1, login);
+			querySt.setString(2, password);
 
 			ResultSet rs = querySt.executeQuery();
 			// Only one result
 			if (rs.next()) {
 				userB = new UserBean();
 				userB.setId(rs.getInt("id"));
+				userB.setLogin(rs.getString("login"));
+				userB.setPassword(rs.getString("password"));
 				userB.setFirstName(rs.getString("firstName"));
 				userB.setLastName(rs.getString("lastName"));
 				userB.setAge(rs.getInt("age"));
