@@ -1,12 +1,17 @@
 package com.j2ee.project.bean;
 
-import java.util.Date;
+import java.io.Serializable;
 
-public class UserBean {
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+@ManagedBean
+@SessionScoped
+public class UserBean implements Serializable{
 	private int id;
 	private String firstName;
 	private String lastName;
-	private Date birthdate;
+	private int age;
 	private String login;
 	private String email;
 	private String password;
@@ -15,25 +20,25 @@ public class UserBean {
 	public UserBean() {
 	}
 
-	public UserBean(int id, String firstName, String lastName, Date birthdate,
+	public UserBean(int id, String firstName, String lastName, int age,
 			String email, String login, String password, boolean administrator) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.birthdate = birthdate;
+		this.age = age;
 		this.email = email;
 		this.login = login;
 		this.password = password;
 		this.administrator = administrator;
 	}
 
-	public UserBean(String firstName, String lastName, Date birthdate,
-			String email, String login, String password) {
+	public UserBean(String firstName, String lastName, int age, String email,
+			String login, String password) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.birthdate = birthdate;
+		this.age = age;
 		this.email = email;
 		this.login = login;
 		this.password = password;
@@ -71,12 +76,12 @@ public class UserBean {
 		this.lastName = lastName;
 	}
 
-	public Date getBirthdate() {
-		return birthdate;
+	public int getAge() {
+		return age;
 	}
 
-	public void setBirthdate(Date birthdate) {
-		this.birthdate = birthdate;
+	public void setAge(int age) {
+		this.age = age;
 	}
 
 	public String getEmail() {
@@ -106,9 +111,9 @@ public class UserBean {
 	@Override
 	public String toString() {
 		return "UserBean [id=" + id + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", birthdate=" + birthdate
-				+ ", login=" + login + ", email=" + email + ", password="
-				+ password + ", administrator=" + administrator + "]";
+				+ ", lastName=" + lastName + ", age=" + age + ", login="
+				+ login + ", email=" + email + ", password=" + password
+				+ ", administrator=" + administrator + "]";
 	}
 
 }

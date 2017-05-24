@@ -11,7 +11,7 @@ public class UserControler {
 	public boolean addUser(UserBean user) {
 		UserDao userDao = UserDao.getInstance();
 
-		boolean rs = userDao.add(user.getFirstName(), user.getLastName(), user.getBirthdate(), user.getLogin(),
+		boolean rs = userDao.add(user.getFirstName(), user.getLastName(), user.getAge(), user.getLogin(),
 				user.getEmail(), user.getPassword());
 
 		return rs;
@@ -20,7 +20,7 @@ public class UserControler {
 	public boolean editUser(UserBean user) {
 		UserDao userDao = UserDao.getInstance();
 
-		boolean rs = userDao.edit(user.getId(), user.getFirstName(), user.getLastName(), user.getBirthdate(),
+		boolean rs = userDao.edit(user.getId(), user.getFirstName(), user.getLastName(), user.getAge(),
 				user.getLogin(), user.getEmail(), user.getPassword(), user.isAdministrator());
 
 		return rs;
@@ -48,7 +48,7 @@ public class UserControler {
 	 */
 	public static void main(String[] args) {
 		UserControler uc = new UserControler();
-		UserBean user = new UserBean("Donatien", "Gascoin", new Date(795924245), "donatien.gascoin@gmail.com", "Dodo",
+		UserBean user = new UserBean("Donatien", "Gascoin", 5, "donatien.gascoin@gmail.com", "Dodo",
 				"dodo95");
 		boolean addUser = uc.addUser(user);
 		System.out.println("User add: " + addUser);

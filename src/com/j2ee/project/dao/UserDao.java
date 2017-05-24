@@ -27,7 +27,7 @@ public class UserDao extends Dao {
 		return userDao;
 	}
 
-	public boolean add(String firstName, String lastName, Date birthdate,
+	public boolean add(String firstName, String lastName, int age,
 			String login, String email, String password) {
 		boolean result = false;
 		try {
@@ -46,7 +46,7 @@ public class UserDao extends Dao {
 			querySt.setString(3, login);
 			querySt.setString(4, password);
 			querySt.setString(5, email);
-			querySt.setDate(6, new java.sql.Date(birthdate.getTime()));
+			querySt.setInt(6, age);
 
 			// Exécution
 			int rs = querySt.executeUpdate();
@@ -65,7 +65,7 @@ public class UserDao extends Dao {
 	}
 
 	public boolean edit(int id, String firstName, String lastName,
-			Date birthdate, String login, String email, String password,
+			int age, String login, String email, String password,
 			boolean administrator) {
 		boolean result = false;
 		try {
@@ -84,7 +84,7 @@ public class UserDao extends Dao {
 			querySt.setString(3, login);
 			querySt.setString(4, password);
 			querySt.setString(5, email);
-			querySt.setDate(6, new java.sql.Date(birthdate.getTime()));
+			querySt.setInt(6, age);
 			querySt.setBoolean(7, administrator);
 			// Where clause
 			querySt.setInt(8, id);
@@ -123,7 +123,7 @@ public class UserDao extends Dao {
 				user.setId(rs.getInt("id"));
 				user.setFirstName(rs.getString("firstName"));
 				user.setLastName(rs.getString("lastName"));
-				user.setBirthdate(rs.getDate("birthdate"));
+				user.setAge(rs.getInt("age"));
 				user.setEmail(rs.getString("email"));
 				user.setAdministrator(rs.getBoolean("administrator"));
 
@@ -162,7 +162,7 @@ public class UserDao extends Dao {
 				userB.setId(rs.getInt("id"));
 				userB.setFirstName(rs.getString("firstName"));
 				userB.setLastName(rs.getString("lastName"));
-				userB.setBirthdate(rs.getDate("birthdate"));
+				userB.setAge(rs.getInt("age"));
 				userB.setEmail(rs.getString("email"));
 				userB.setAdministrator(rs.getBoolean("administrator"));
 
