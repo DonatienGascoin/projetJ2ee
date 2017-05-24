@@ -1,6 +1,11 @@
 package com.j2ee.project.bean;
 
-public class ReceipeBean {
+import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+
+
+@ManagedBean
+public class ReceipeBean implements Serializable{
 
 	private int id;
 	private String name;
@@ -10,11 +15,12 @@ public class ReceipeBean {
 	private int complexity;
 	private String type;
 	private String image;
+	private int duration;
 
 	public ReceipeBean() {
 	}
 
-	public ReceipeBean(String name, String details, String resume, int nbPersons, int complexity, String type, String image) {
+	public ReceipeBean(String name, String details, String resume, int nbPersons, int complexity, String type, String image, int duration) {
 		super();
 		this.name = name;
 		this.details = details;
@@ -23,9 +29,10 @@ public class ReceipeBean {
 		this.complexity = complexity;
 		this.type = type;
 		this.image=image;
+		this.duration = duration;
 	}
 
-	public ReceipeBean(int id, String name, String details, String resume, int nbPersons, int complexity, String type, String image) {
+	public ReceipeBean(int id, String name, String details, String resume, int nbPersons, int complexity, String type, String image, int duration) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -35,6 +42,7 @@ public class ReceipeBean {
 		this.complexity = complexity;
 		this.type = type;
 		this.image=image;
+		this.duration = duration;
 	}
 
 	public int getId() {
@@ -96,14 +104,22 @@ public class ReceipeBean {
 	public String getImage() {
 		return image;
 	}
-
+	
 	public void setImage(String image) {
 		this.image = image;
 	}
 
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
 	@Override
 	public String toString() {
-		return "ReceipeBean [id=" + id + ", name=" + name + ", details="
+		return "ReceipeBean [id=" + id + ", name=" + name + ", duration" + duration + ", details="
 				+ details + ", resume=" + resume + ", nbPersons=" + nbPersons
 				+ ", complexity=" + complexity + ", type=" + type + ", image="
 				+ image + "]";

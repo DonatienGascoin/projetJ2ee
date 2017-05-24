@@ -1,6 +1,12 @@
 package com.j2ee.project.bean;
 
-public class NoteBean {
+import java.io.Serializable;
+
+import javax.faces.bean.ManagedBean;
+
+
+@ManagedBean
+public class NoteBean implements Serializable {
 
 	private int id;
 	private int idReceipe;

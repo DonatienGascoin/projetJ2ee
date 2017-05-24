@@ -55,7 +55,7 @@ public class ReceipeControler {
 
 		ReceipeBean bean = new ReceipeBean("Crepes",
 				"Farine + oeuf + lait + biere", "Delicieuse crepes", 4, 1,
-				"Dessert", "crepes.png");
+				"Dessert", "crepes.png", 3);
 		boolean addReceipt = rc.addReceipt(bean);
 		System.out.println("Add receipe: " + addReceipt);
 
