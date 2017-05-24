@@ -1,6 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
 	template="../template/template.xhtml">
 	<ui:define name="sectionTitle">
 Creation User
@@ -13,25 +14,86 @@ Creation User
 
 	<ui:define name="sectionContent">
 		<div id="createUserForm">
-			<form id="createUser">
-				<label>First Name : </label>
-				<h:inputText id="firstname" name="firstname"></h:inputText>
-				<label>Last Name : </label>
-				<h:inputText id="lastname" name="lastname"></h:inputText>
-				<label>Age : </label>
-				<h:inputText id="age" name="age"></h:inputText>
-				<label>Mail : </label>
-				<h:inputText id="mail" name="mail"></h:inputText>
-				<label>Login : </label>
-				<h:inputText id="login" name="login"></h:inputText>
-				<label>Password : </label>
-				<h:inputSecret id="pwd" name="pwd"></h:inputSecret>
-				<label>Password 2 : </label>
-				<h:inputSecret id="pwd2" name="pwd2"></h:inputSecret>
-				<br/>
-				<h:button id="submitUserCreate" name="submitUserCreate" value="Register"></h:button>
-			</form>
-			<a href="../menu.jsf"><h:button id="cancelUserCreate" name="cancelUserCreate" value="Cancel"></h:button></a>
+			<table id="tableForm">
+				<h:form id="createUser" method="post" action="createUser">
+
+					<tr>
+						<td><label>First Name : </label></td>
+						<td><h:inputText id="firstname" name="firstname"
+								required="true">
+								<f:validator validatorId="check.firstName" />
+							</h:inputText></td>
+						<td><h:message for="firstname" showDetail="true"
+								style="color:red" /></td>
+					</tr>
+
+					<tr>
+						<td><label>Last Name : </label></td>
+						<td><h:inputText id="lastname" name="lastname"
+								required="true">
+								<f:validator validatorId="check.lastName" />
+							</h:inputText></td>
+						<td><h:message for="lastname" showDetail="true"
+								style="color:red" /></td>
+					</tr>
+
+					<tr>
+						<td><label>Age : </label></td>
+						<td><h:inputText id="age" name="age" required="true">
+								<f:validator validatorId="check.age" />
+							</h:inputText></td>
+						<td><h:message for="age" showDetail="true" style="color:red" />
+						</td>
+					</tr>
+
+					<tr>
+						<td><label>Mail : </label></td>
+						<td><h:inputText id="mail" name="mail" required="true">
+								<f:validator validatorId="check.mail" />
+							</h:inputText></td>
+						<td><h:message for="mail" showDetail="true" style="color:red" />
+						</td>
+					</tr>
+
+					<tr>
+						<td><label>Login : </label></td>
+						<td><h:inputText id="login" name="login" required="true">
+								<f:validator validatorId="check.login" />
+							</h:inputText></td>
+						<td><h:message for="login" showDetail="true"
+								style="color:red" /></td>
+					</tr>
+
+					<tr>
+						<td><label>Password : </label></td>
+						<td><h:inputSecret id="pwd" name="pwd" required="true" binding="#{pwdTest}">
+								<f:validator validatorId="check.pwd" />								 
+							</h:inputSecret></td>
+						<td><h:message for="pwd" showDetail="true" style="color:red" />
+						</td>
+					</tr>
+
+					<tr>
+						<td><label>Password 2 : </label></td>
+						<td><h:inputSecret id="pwd2" name="pwd2" required="true">
+								<f:validator validatorId="check.pwd2" />
+								<f:attribute name="pwdTest" value="#{pwdTest}" /> 
+							</h:inputSecret></td>
+						<td><h:message for="pwd2" showDetail="true" style="color:red" />
+						</td>
+					</tr>
+					<br />
+					<tr>
+						<td><h:commandButton id="submitUserCreate"
+								name="submitUserCreate" value="Register"></h:commandButton></td>
+					</tr>
+
+					<tr>
+						<td><a href="../menu.jsf"><h:button id="cancelUserCreate"
+									name="cancelUserCreate" value="Cancel"></h:button></a></td>
+					</tr>
+				</h:form>
+			</table>
 		</div>
 	</ui:define>
 

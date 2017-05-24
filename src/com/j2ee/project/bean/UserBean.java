@@ -1,6 +1,13 @@
 package com.j2ee.project.bean;
 
-public class UserBean {
+import java.io.Serializable;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+@ManagedBean
+@SessionScoped
+public class UserBean implements Serializable{
 	private int id;
 	private String firstName;
 	private String lastName;
