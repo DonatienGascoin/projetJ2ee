@@ -217,5 +217,45 @@ public class UserDao extends Dao {
 		}
 		return userB;
 	}
+	
+	public UserBean connectAdmin(String login, String password) {
+		UserBean userB = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+
+			Connection conn;
+			conn = DriverManager.getConnection(url, user, passwd);
+
+			PreparedStatement querySt = conn
+					.prepareStatement(Request.EXIST_ADMIN.getQuery());
+			// Définition de la valeur des paramètres
+			querySt.setString(1, login);
+			querySt.setString(2, password);
+
+			ResultSet rs = querySt.executeQuery();
+			// Only one result
+			if (rs.next()) {
+				userB = new UserBean();
+				userB.setId(rs.getInt("id"));
+				userB.setLogin(rs.getString("login"));
+				userB.setPassword(rs.getString("password"));
+				userB.setFirstName(rs.getString("firstName"));
+				userB.setLastName(rs.getString("lastName"));
+				userB.setAge(rs.getInt("age"));
+				userB.setEmail(rs.getString("email"));
+				userB.setAdministrator(rs.getBoolean("administrator"));
+			}
+
+			rs.close();
+			querySt.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return userB;
+	}
 
 }

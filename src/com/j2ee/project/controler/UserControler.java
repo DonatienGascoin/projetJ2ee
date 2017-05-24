@@ -57,6 +57,14 @@ public class UserControler {
 
 		return user;
 	}
+	
+	public UserBean connectAdmin(String login, String password) {
+		UserDao userDao = UserDao.getInstance();
+
+		UserBean user = userDao.connectAdmin(login, password);
+
+		return user;
+	}
 
 	/**
 	 * To test
