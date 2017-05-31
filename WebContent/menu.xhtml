@@ -2,24 +2,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
-	<meta charset="UTF-8"/>
-	<title>Menu	</title>
-	<link rel="stylesheet" href="../css/menu.css"/>
-	<link rel="stylesheet" href="../css/general.css"/>
+	<meta charset="UTF-8" />
+	<title>Menu</title>
+	<link rel="stylesheet" href="css/menu.css" />
+	<link rel="stylesheet" href="css/general.css" />
 </h:head>
 <h:body>
 
+	<div id="buttonMenu">
+		<div class="left" id="leftMenu">
+			<div id="emergency" class="buttonMenu">
+				<a class="buttonClick" href="composite/createUser.jsf">Emergency</a>
+			</div>
+			<div id="recipes" class="buttonMenu">
+				<a class="buttonClick" href="composite/searchRecipes.jsf">Recipes</a>
+			</div>
+		</div>
+		<div class="right" id="rightMenu">
+			<div id="shop" class="buttonMenu">
+				<a class="buttonClick" href="">Shop</a>
+			</div>
+		</div>
+	</div>
 
-<div id="buttonMenu">
-	<div id="emergency"><a class="buttonClick" href="composite/createUser.jsf">Emergency</a></div>
-	<div id="recipes"><a class="buttonClick" href="">Recipes</a></div>
-	<div id="shop"><a class="buttonClick" href="">Shop</a></div>
-</div>
-
-<div class="footer">
-		<span id="copyright"> Copyright 2013 all right reserved</span>
-		<img src="img/background.jpeg" alt="Smiley face" id="imgLogo" />
-</div>
-
+	<div class="footer">
+		<span id="copyright"> Copyright 2013 all right reserved</span> <img
+			src="img/background.jpeg" alt="Smiley face" id="imgLogo" />
+	</div>
 </h:body>
-</html>	
+</html>
