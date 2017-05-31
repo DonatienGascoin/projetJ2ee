@@ -1,7 +1,9 @@
 package com.j2ee.project.controler;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
@@ -12,10 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.j2ee.project.bean.UserBean;
 import com.j2ee.project.dao.UserDao;
 import com.mysql.jdbc.Util;
+import com.sun.xml.internal.bind.CycleRecoverable.Context;
 
 @ManagedBean
 public class UserControler {
 
+	UserBean UserBean;
+	
 	public boolean addUser(UserBean user) {
 		
 		UserDao userDao = UserDao.getInstance();
@@ -53,12 +58,17 @@ public class UserControler {
 		return user;
 	}
 
-	public UserBean connectUser(String login, String password) {
+	public void connectUser(String login, String password) {
 		UserDao userDao = UserDao.getInstance();
 
 		UserBean user = userDao.connectUser(login, password);
 
-		return user;
+		if (user == null){
+			this.logout();
+		}else{
+			Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+			sessionMap.put("userBean", user);
+		}
 	}
 	
 	public void connectAdmin(String login, String password) throws IOException {
@@ -68,6 +78,10 @@ public class UserControler {
 
 		if (user != null){
 			this.redirectTo("adminIndex");
+			Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+			sessionMap.put("userBean", user);
+		}else{
+			this.logout();
 		}
 	}
 
@@ -94,6 +108,13 @@ public class UserControler {
 		user = uc.getUser(1);
 		System.out.println("User edited:" + user);
 
+	}
+	
+	public void logout(){
+		
+		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> test = context.getSessionMap();
+		test.clear();
 	}
 	
 	// method to redirect to other page
