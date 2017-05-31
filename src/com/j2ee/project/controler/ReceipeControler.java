@@ -49,21 +49,7 @@ public class ReceipeControler {
 		ReceipeBean receipe = receipeDao.getReceipe(receipeId);
 
 		return receipe;
-	}
-
-	public void redirection(String page){
-		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-    	context.getFlash().setKeepMessages(true);
-        try {
-			context.redirect(context.getRequestContextPath() + "/jsf/" + page + ".jsf");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	
-	
-	
+	}	
 	
 	public List<ReceipeBean> getReceipe(ReceipeBean receipe) {
 		ReceipeDao receipeDao = ReceipeDao.getInstance();
@@ -80,6 +66,18 @@ public class ReceipeControler {
 		List<ReceipeBean> receipes = receipeDao.getReceipe(duration, complexity, nbPersons, type);
 
 		return receipes;
+	}
+	
+
+
+	public void redirection(String page){
+		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+    	context.getFlash().setKeepMessages(true);
+        try {
+			context.redirect(context.getRequestContextPath() + "/composite/" + page + ".jsf");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
