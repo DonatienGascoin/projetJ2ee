@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/template.xhtml">
+
+	<ui:define name="optionalCSS">
+		<link rel="stylesheet" href="../css/showReiceipeResult.css" />
+	</ui:define>
+
+	<ui:define name="sectionTitle">
+Creation User
+</ui:define>
+
+	<ui:define name="sectionHeaderActivity">
+		<div id="headerActivity" style="background-color: orange">
+			Receipe</div>
+	</ui:define>
+
+	<ui:define name="sectionContent">
+		<h1>Available receipes</h1>
+			<p:dataGrid var="receipetmp" id="dataTable"
+				value="#{receipeControler.getReceipe(receipeBean)}" columns="3"
+				rows="12" paginator="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="9,12,15">
+
+				<p:panel header="#{receipetmp.name}" style="text-align:center">
+					<h:panelGrid columns="1">
+						<div class="infos">
+							<table>
+								<tr>
+									<td><img src="../img/type_cuisine.png" alt="Cuisine"
+										class="imgLogo" /></td>
+									<td>#{receipetmp.type}</td>
+								</tr>
+								<tr>
+									<td><img src="../img/horloge.png" alt="Horloge"
+										class="imgLogo" /></td>
+									<td>#{receipetmp.duration} heures</td>
+								</tr>
+								<tr>
+									<td><img src="../img/nbPersons.png" alt="Nb personnes"
+										class="imgLogo" /></td>
+									<td>#{receipetmp.nbPersons} personnes</td>
+								</tr>
+								<tr>
+									<td><img src="../img/note.png" alt="Note" class="imgLogo" /></td>
+									<td>#{receipetmp.complexity}</td>
+								</tr>
+							</table>
+						</div>
+						<div class="resume">
+						<p>Resume:<br />
+							#{receipetmp.resume}</p>
+						</div>
+
+					</h:panelGrid>
+				</p:panel>
+
+			</p:dataGrid>
+	</ui:define>
+
+</ui:composition>

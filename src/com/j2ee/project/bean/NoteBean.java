@@ -1,5 +1,8 @@
 package com.j2ee.project.bean;
 
+import javax.faces.bean.RequestScoped;
+
+@RequestScoped
 public class NoteBean {
 
 	private int id;

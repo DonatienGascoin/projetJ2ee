@@ -26,7 +26,8 @@ public class ReceipeDao extends Dao {
 		return userDao;
 	}
 
-	public boolean add(String name, String details, String resume, int nbPersons, int complexity, String type, String image) {
+	public boolean add(String name, String details, String resume, int nbPersons, int complexity, String type,
+			String image, int duration) {
 		boolean result = false;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -44,6 +45,7 @@ public class ReceipeDao extends Dao {
 			querySt.setInt(5, complexity);
 			querySt.setString(6, type);
 			querySt.setString(7, image);
+			querySt.setInt(8, duration);
 
 			// Exécution
 			int rs = querySt.executeUpdate();
@@ -61,8 +63,8 @@ public class ReceipeDao extends Dao {
 		return result;
 	}
 
-	public boolean edit(int id, String name, String details, String resume, int nbPersons, int complexity,
-			String type, String image) {
+	public boolean edit(int id, String name, String details, String resume, int nbPersons, int complexity, String type,
+			String image, int duration) {
 		boolean result = false;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -81,8 +83,9 @@ public class ReceipeDao extends Dao {
 			querySt.setInt(5, complexity);
 			querySt.setString(6, type);
 			querySt.setString(7, image);
+			querySt.setInt(8, duration);
 			// Where clause
-			querySt.setInt(8, id);
+			querySt.setInt(9, id);
 
 			// Execution
 			int rs = querySt.executeUpdate();
@@ -121,6 +124,8 @@ public class ReceipeDao extends Dao {
 				receipe.setNbPersons(rs.getInt("nbPersons"));
 				receipe.setResume(rs.getString("resume"));
 				receipe.setType(rs.getString("type"));
+				receipe.setImage(rs.getString("image"));
+				receipe.setDuration(rs.getInt("duration"));
 
 				receiptList.add(receipe);
 			}
@@ -136,7 +141,7 @@ public class ReceipeDao extends Dao {
 		}
 		return receiptList;
 	}
-	
+
 	public ReceipeBean getReceipe(int id) {
 		ReceipeBean receipe = null;
 		try {
@@ -145,8 +150,7 @@ public class ReceipeDao extends Dao {
 			Connection conn;
 			conn = DriverManager.getConnection(url, user, passwd);
 
-			PreparedStatement querySt = conn
-					.prepareStatement(Request.SELECT_RECEIPT.getQuery());
+			PreparedStatement querySt = conn.prepareStatement(Request.SELECT_RECEIPT.getQuery());
 			querySt.setInt(1, id);
 
 			ResultSet rs = querySt.executeQuery();
@@ -160,6 +164,8 @@ public class ReceipeDao extends Dao {
 				receipe.setNbPersons(rs.getInt("nbPersons"));
 				receipe.setResume(rs.getString("resume"));
 				receipe.setType(rs.getString("type"));
+				receipe.setImage(rs.getString("image"));
+				receipe.setDuration(rs.getInt("duration"));
 			}
 
 			rs.close();
@@ -172,5 +178,48 @@ public class ReceipeDao extends Dao {
 			e.printStackTrace();
 		}
 		return receipe;
+	}
+
+	public List<ReceipeBean> getReceipe(int duration, int complexity, int nbPersons, String type) {
+		List<ReceipeBean> receipes = new ArrayList<>();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+
+			Connection conn;
+			conn = DriverManager.getConnection(url, user, passwd);
+
+			PreparedStatement querySt = conn.prepareStatement(Request.SEARCH_RECEIPT.getQuery());
+			querySt.setInt(1, duration);
+			querySt.setInt(2, complexity);
+			querySt.setInt(3, nbPersons);
+			querySt.setString(4, type);
+
+			ResultSet rs = querySt.executeQuery();
+			// Only one result
+			while (rs.next()) {
+				ReceipeBean receipe = new ReceipeBean();
+				receipe.setId(rs.getInt("id"));
+				receipe.setDetails(rs.getString("details"));
+				receipe.setName(rs.getString("name"));
+				receipe.setComplexity(rs.getInt("complexity"));
+				receipe.setNbPersons(rs.getInt("nbPersons"));
+				receipe.setResume(rs.getString("resume"));
+				receipe.setType(rs.getString("type"));
+				receipe.setImage(rs.getString("image"));
+				receipe.setDuration(rs.getInt("duration"));
+
+				receipes.add(receipe);
+			}
+
+			rs.close();
+			querySt.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return receipes;
 	}
 }

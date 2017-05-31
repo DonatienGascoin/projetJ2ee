@@ -19,16 +19,18 @@ public enum Request {
 			+ "SET lastName=?, firstName=?, login=?, password=?, email=?, age=?, administrator=? "
 			+ "WHERE id=?;"),
 	
-	SELECT_ALL_RECEIPT("SELECT `id`, `name`, `resume`, `details`, `nbPersons`, `complexity`, `type`, `image` FROM binome36.RECEIPE"),
+	SELECT_ALL_RECEIPT("SELECT `id`, `name`, `resume`, `details`, `nbPersons`, `complexity`, `type`, `image`, `duration` FROM binome36.RECEIPE"),
 	
-	SELECT_RECEIPT("SELECT `id`, `name`, `resume`, `details`, `nbPersons`, `complexity`, `type`, image FROM binome36.RECEIPE where id=?"),
+	SELECT_RECEIPT("SELECT `id`, `name`, `resume`, `details`, `nbPersons`, `complexity`, `type`, `image`, `duration` FROM binome36.RECEIPE where id=?"),
+	
+	SEARCH_RECEIPT("SELECT `id`, `name`, `resume`, `details`, `nbPersons`, `complexity`, `type`, `image`, `duration` FROM binome36.RECEIPE where duration=? and complexity=? and nbPersons=? and type like ?"),
 
-	INSERT_RECEIPE("INSERT INTO binome36.RECEIPE(`id`, `name`, `resume`, `details`, `nbPersons`, `complexity`, `type`, image)"
+	INSERT_RECEIPE("INSERT INTO binome36.RECEIPE(`id`, `name`, `resume`, `details`, `nbPersons`, `complexity`, `type`, `image`, `duration`)"
 			+ " VALUES"
-			+ " (null,?,?,?,?,?,?,?)"),
+			+ " (null,?,?,?,?,?,?,?,?)"),
 	
 	UPDATE_RECEIPE("UPDATE binome36.RECEIPE"
-			+ " SET `name`=?,`resume`=?,`details`=?,`nbPersons`=?,`complexity`=?,`type`=?, `image`=?"
+			+ " SET `name`=?,`resume`=?,`details`=?,`nbPersons`=?,`complexity`=?,`type`=?, `image`=?, `duration`=?"
 			+ " WHERE id=?"),
 			
 	INSERT_NOTE("INSERT INTO binome36.NOTE (id, idReceipe, title, note, idUser)"
