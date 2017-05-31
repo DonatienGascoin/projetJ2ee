@@ -8,7 +8,7 @@
 	<ui:define name="sectionTitle"> Search recipes </ui:define>
 
 	<ui:define name="sectionHeaderActivity">
-		<div id="headerActivity" style="background-color: blue">Recipes</div>
+		<div id="headerActivity" style="background-color: teal;">Recipes</div>
 	</ui:define>
 
 	<ui:define name="sectionContent">
@@ -63,9 +63,9 @@
 			</h:panelGrid>
 			
 			<p:commandButton value="Teach Me!" id="TeachMe"
-				actionListener="#{receipeControler.getReceipe(receipeBean)}"
+				action="#{receipeControler.getReceipe(receipeBean)}"
 				ajax="false"
-				style="text-align: center;margin-left:50%;margin-right: 50%;background-color:blue;">
+				style="text-align: center;margin-left:50%;margin-right: 50%;background-color:teal;">
 			</p:commandButton>
 			
 

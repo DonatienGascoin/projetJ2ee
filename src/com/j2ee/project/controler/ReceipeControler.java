@@ -51,7 +51,7 @@ public class ReceipeControler {
 
 		return receipe;
 	}	
-	public void getReceipe(ReceipeBean receipe) {
+	public String getReceipe(ReceipeBean receipe) {
 		ReceipeDao receipeDao = ReceipeDao.getInstance();
 		List<ReceipeBean> receipes = receipeDao.getReceipe(receipe.getDuration(), receipe.getComplexity(),
 				receipe.getNbPersons(), receipe.getType());
@@ -59,10 +59,7 @@ public class ReceipeControler {
 		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 		sessionMap.put("currentRecipeResearch", receipes);
 		
-		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-    	context.getFlash().setKeepMessages(true);
-    	
-    	redirection("showReceipeResult");
+		return "showReceipeResult.jsf";
 	}
 
 	public List<ReceipeBean> getReceipe(int duration, int complexity, int nbPersons, String type) {
