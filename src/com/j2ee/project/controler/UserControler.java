@@ -1,8 +1,10 @@
 package com.j2ee.project.controler;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,12 +60,14 @@ public class UserControler {
 		return user;
 	}
 	
-	public UserBean connectAdmin(String login, String password) {
+	public void connectAdmin(String login, String password) throws IOException {
 		UserDao userDao = UserDao.getInstance();
 
 		UserBean user = userDao.connectAdmin(login, password);
 
-		return user;
+		if (user != null){
+			this.redirectTo("adminIndex");
+		}
 	}
 
 	/**
@@ -89,4 +93,15 @@ public class UserControler {
 		System.out.println("User edited:" + user);
 
 	}
+	
+	// method to redirect to other page
+    public void redirectTo(String page) {
+    	ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+    	context.getFlash().setKeepMessages(true);
+        try {
+			context.redirect(context.getRequestContextPath() + "/composite/" + page + ".jsf");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
 }
