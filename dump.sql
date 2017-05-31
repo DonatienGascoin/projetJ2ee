@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS USERS (
 	login varchar(255),
 	password varchar(255),
 	email varchar(255),
-	birthdate date,
+	age int,
 	administrator boolean,
 	CONSTRAINT PK_USERS PRIMARY KEY (id)
 );
@@ -23,6 +23,8 @@ CREATE TABLE IF NOT EXISTS RECEIPE (
 	nbPersons int,
 	complexity int,
 	type varchar(30),
+	image varchar(255),
+	duration int,
 	CONSTRAINT PK_RECEIPE PRIMARY KEY (id)
 );
 
@@ -42,10 +44,4 @@ ADD idUser int not null;
 
 Alter table NOTE
 ADD FOREIGN key (idUser) REFERENCES USERS (id);
-
-ALTER TABLE binome36.USERS DROP COLUMN birthdate;
-ALTER TABLE binome36.USERS ADD age INT;
-
-ALTER TABLE binome36.RECEIPE ADD image VARCHAR(100);
-
 

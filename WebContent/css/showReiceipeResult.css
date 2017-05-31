@@ -1,0 +1,38 @@
+#dataTable{
+	width:80%;
+	margin:auto;
+}
+
+.infos {
+	float: left;
+	border-right: 1px solid black;
+	width: 40%;
+	margin-right:3%;
+	padding-right:3%;
+}
+
+.resume {
+	margin-left: 40	%;
+	padding-top:0;
+}
+
+.resume h3{
+	margin:0;
+	padding:0;
+	text-align:center;
+	text-transform: uppercase;
+}
+
+.resume span{
+	text-decoration: underline;
+}
+
+.imgLogo {
+	width: 40%;
+	padding: 0;
+}
+
+td {
+	text-align: left;
+	border-collapse: collapse;
+}

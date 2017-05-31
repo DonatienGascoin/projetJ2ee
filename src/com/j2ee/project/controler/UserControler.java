@@ -2,9 +2,14 @@ package com.j2ee.project.controler;
 
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
 import com.j2ee.project.bean.UserBean;
 import com.j2ee.project.dao.UserDao;
 
+@ManagedBean
+@SessionScoped
 public class UserControler {
 
 	public boolean addUser(UserBean user) {

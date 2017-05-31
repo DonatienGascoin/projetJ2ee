@@ -2,9 +2,14 @@ package com.j2ee.project.controler;
 
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
 import com.j2ee.project.bean.NoteBean;
 import com.j2ee.project.dao.NoteDao;
 
+@ManagedBean
+@SessionScoped
 public class NoteControler {
 
 	public boolean addNote(NoteBean note) {

@@ -1,5 +1,10 @@
 package com.j2ee.project.bean;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+
+@ManagedBean
+@RequestScoped
 public class ReceipeBean {
 
 	private int id;
@@ -10,11 +15,13 @@ public class ReceipeBean {
 	private int complexity;
 	private String type;
 	private String image;
+	private int duration;
 
 	public ReceipeBean() {
 	}
 
-	public ReceipeBean(String name, String details, String resume, int nbPersons, int complexity, String type, String image) {
+	public ReceipeBean(String name, String details, String resume, int nbPersons, int complexity, String type,
+			String image, int duration) {
 		super();
 		this.name = name;
 		this.details = details;
@@ -22,10 +29,12 @@ public class ReceipeBean {
 		this.nbPersons = nbPersons;
 		this.complexity = complexity;
 		this.type = type;
-		this.image=image;
+		this.image = image;
+		this.duration = duration;
 	}
 
-	public ReceipeBean(int id, String name, String details, String resume, int nbPersons, int complexity, String type, String image) {
+	public ReceipeBean(int id, String name, String details, String resume, int nbPersons, int complexity, String type,
+			String image, int duration) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -34,7 +43,8 @@ public class ReceipeBean {
 		this.nbPersons = nbPersons;
 		this.complexity = complexity;
 		this.type = type;
-		this.image=image;
+		this.image = image;
+		this.duration = duration;
 	}
 
 	public int getId() {
@@ -101,12 +111,19 @@ public class ReceipeBean {
 		this.image = image;
 	}
 
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
 	@Override
 	public String toString() {
-		return "ReceipeBean [id=" + id + ", name=" + name + ", details="
-				+ details + ", resume=" + resume + ", nbPersons=" + nbPersons
-				+ ", complexity=" + complexity + ", type=" + type + ", image="
-				+ image + "]";
+		return "ReceipeBean [id=" + id + ", name=" + name + ", details=" + details + ", resume=" + resume
+				+ ", nbPersons=" + nbPersons + ", complexity=" + complexity + ", type=" + type + ", image=" + image
+				+ ", duration=" + duration + "]";
 	}
 
 }
