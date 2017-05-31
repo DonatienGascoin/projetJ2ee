@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.j2ee.project.bean.UserBean;
 import com.j2ee.project.dao.UserDao;
+import com.mysql.jdbc.Util;
 
 @ManagedBean
 public class UserControler {
@@ -69,6 +70,7 @@ public class UserControler {
 			this.redirectTo("adminIndex");
 		}
 	}
+
 
 	/**
 	 * To test
