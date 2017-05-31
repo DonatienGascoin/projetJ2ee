@@ -1,9 +1,12 @@
 package com.j2ee.project.controler;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 import com.j2ee.project.bean.ReceipeBean;
 import com.j2ee.project.dao.ReceipeDao;
@@ -48,6 +51,20 @@ public class ReceipeControler {
 		return receipe;
 	}
 
+	public void redirection(String page){
+		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+    	context.getFlash().setKeepMessages(true);
+        try {
+			context.redirect(context.getRequestContextPath() + "/jsf/" + page + ".jsf");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
 	public List<ReceipeBean> getReceipe(ReceipeBean receipe) {
 		ReceipeDao receipeDao = ReceipeDao.getInstance();
 		receipe = new ReceipeBean("Crepes", "Farine + oeuf + lait + biere", "Delicieuse crepes", 4, 1, "Dessert",
