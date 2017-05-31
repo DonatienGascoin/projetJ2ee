@@ -21,7 +21,7 @@ Creation User
 	<ui:define name="sectionContent">
 		<h1>Available receipes</h1>
 			<p:dataGrid var="receipetmp" id="dataTable"
-				value="#{currentRecipeResearch}" columns="3"
+				value="#{RecipesList.receipeBeans}" columns="3"
 				rows="12" paginator="true"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="9,12,15">

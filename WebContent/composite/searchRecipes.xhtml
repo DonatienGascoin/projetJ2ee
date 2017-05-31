@@ -23,7 +23,7 @@
 							value="../img/horloge.png" alt="Horloge" />
 						<p:outputLabel for="duration" value="Preparation Duration: " />
 					</h:panelGrid>
-					<p:inputMask id="duration" value="#{receipeBean.duration}"
+					<p:inputMask id="duration" value="#{receipeBean.researchDuration}"
 						mask="99:99" />
 				</h:panelGrid>
 
@@ -53,10 +53,10 @@
 						<p:outputLabel for="cooktype" value="Cook Type:" />
 					</h:panelGrid>
 					<p:selectOneListbox id="cooktype" value="#{receipeBean.type}">
-						<f:selectItem itemLabel="Salad" itemValue="1" />
-						<f:selectItem itemLabel="Meal" itemValue="2" />
-						<f:selectItem itemLabel="Fish" itemValue="3" />
-						<f:selectItem itemLabel="Desert" itemValue="4" />
+						<f:selectItem itemLabel="Salad" itemValue="Salad" />
+						<f:selectItem itemLabel="Meal" itemValue="Meal" />
+						<f:selectItem itemLabel="Fish" itemValue="Fish" />
+						<f:selectItem itemLabel="Desert" itemValue="Desert" />
 					</p:selectOneListbox>
 				</h:panelGrid>
 

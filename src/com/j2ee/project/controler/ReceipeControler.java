@@ -9,6 +9,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import com.j2ee.project.bean.RecipesList;
 import com.j2ee.project.bean.ReceipeBean;
 import com.j2ee.project.dao.ReceipeDao;
 
@@ -50,15 +51,19 @@ public class ReceipeControler {
 		ReceipeBean receipe = receipeDao.getReceipe(receipeId);
 
 		return receipe;
-	}	
+	}
+
 	public String getReceipe(ReceipeBean receipe) {
 		ReceipeDao receipeDao = ReceipeDao.getInstance();
-		List<ReceipeBean> receipes = receipeDao.getReceipe(receipe.getDuration(), receipe.getComplexity(),
-				receipe.getNbPersons(), receipe.getType());
-		
-		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-		sessionMap.put("currentRecipeResearch", receipes);
-		
+
+		RecipesList recipes = new RecipesList(receipeDao.getReceipe(receipe.getDuration(), receipe.getComplexity(),
+				receipe.getNbPersons(), receipe.getType()));
+
+		/*
+		 * Map<String, Object> sessionMap =
+		 * FacesContext.getCurrentInstance().getExternalContext().getSessionMap(
+		 * ); sessionMap.put("currentRecipeResearch", recipes);
+		 */
 		return "showReceipeResult.jsf";
 	}
 
@@ -69,13 +74,11 @@ public class ReceipeControler {
 
 		return receipes;
 	}
-	
 
-
-	public void redirection(String page){
+	public void redirection(String page) {
 		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-    	context.getFlash().setKeepMessages(true);
-        try {
+		context.getFlash().setKeepMessages(true);
+		try {
 			context.redirect(context.getRequestContextPath() + "/composite/" + page + ".jsf");
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -1,12 +1,13 @@
 package com.j2ee.project.bean;
 
 import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 @ManagedBean
 @RequestScoped
-public class ReceipeBean implements Serializable{
+public class ReceipeBean implements Serializable {
 
 	private int id;
 	private String name;
@@ -17,6 +18,7 @@ public class ReceipeBean implements Serializable{
 	private String type;
 	private String image;
 	private int duration;
+	private String researchDuration;
 
 	public ReceipeBean() {
 	}
@@ -32,6 +34,19 @@ public class ReceipeBean implements Serializable{
 		this.type = type;
 		this.image = image;
 		this.duration = duration;
+	}
+
+	public ReceipeBean(String name, String details, String resume, int nbPersons, int complexity, String type,
+			String image, String researchDuration) {
+		super();
+		this.name = name;
+		this.details = details;
+		this.resume = resume;
+		this.nbPersons = nbPersons;
+		this.complexity = complexity;
+		this.type = type;
+		this.image = image;
+		this.researchDuration = researchDuration;
 	}
 
 	public ReceipeBean(int id, String name, String details, String resume, int nbPersons, int complexity, String type,
@@ -107,7 +122,7 @@ public class ReceipeBean implements Serializable{
 	public String getImage() {
 		return image;
 	}
-	
+
 	public void setImage(String image) {
 		this.image = image;
 	}
@@ -120,11 +135,22 @@ public class ReceipeBean implements Serializable{
 		this.duration = duration;
 	}
 
+	public String getResearchDuration() {
+		return researchDuration;
+	}
+
+	public void setResearchDuration(String researchDuration) {
+		this.researchDuration = researchDuration;
+
+		String[] split = researchDuration.split(":");
+		setDuration(Integer.parseInt(split[0]) * 60 + Integer.parseInt(split[1]));
+	}
+
 	@Override
 	public String toString() {
 		return "ReceipeBean [id=" + id + ", name=" + name + ", details=" + details + ", resume=" + resume
 				+ ", nbPersons=" + nbPersons + ", complexity=" + complexity + ", type=" + type + ", image=" + image
-				+ ", duration=" + duration + "]";
+				+ ", duration=" + duration + ", researchDuration=" + researchDuration + "]";
 	}
 
 }
