@@ -2,6 +2,7 @@ package com.j2ee.project.controler;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -50,14 +51,18 @@ public class ReceipeControler {
 
 		return receipe;
 	}	
-	
-	public List<ReceipeBean> getReceipe(ReceipeBean receipe) {
+	public void getReceipe(ReceipeBean receipe) {
 		ReceipeDao receipeDao = ReceipeDao.getInstance();
-		receipe = new ReceipeBean("Crepes", "Farine + oeuf + lait + biere", "Delicieuse crepes", 4, 1, "Dessert",
-				"crepes.png", 4);
 		List<ReceipeBean> receipes = receipeDao.getReceipe(receipe.getDuration(), receipe.getComplexity(),
 				receipe.getNbPersons(), receipe.getType());
-		return receipes;
+		
+		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		sessionMap.put("currentRecipeResearch", receipes);
+		
+		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+    	context.getFlash().setKeepMessages(true);
+    	
+    	redirection("showReceipeResult");
 	}
 
 	public List<ReceipeBean> getReceipe(int duration, int complexity, int nbPersons, String type) {
