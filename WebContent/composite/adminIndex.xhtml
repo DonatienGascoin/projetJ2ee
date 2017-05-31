@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Administration</title>
+	<link rel="stylesheet" href="css/styleTemplate.css" />
+	<link rel="stylesheet" href="css/menu.css" />
+	<link rel="stylesheet" href="css/general.css" />
+</h:head>
+<h:body>
+
+	<div class="header">
+		<div id="headerActivity" style="background-color: red">
+			Administration</div>
+	</div>
+
+	<div class="content">
+		<div id="logAdminForm">
+			<h:form id="logAdmin">
+				<h:commandButton id="adminUser" name="adminUser"
+					value="Manage users" action="#{userControler.redirectTo('adminUser')}"></h:commandButton>
+
+				<h:commandButton id="adminReceipe" name="adminReceipe"
+					value="Manage receipes" action="#{userControler.redirectTo('adminReceipe')}"></h:commandButton>
+			</h:form>
+		</div>
+	</div>
+
+	<div class="footer">
+		<span id="copyright">Copyright 2013 all right reserved</span> <img
+			src="../img/background.jpeg" alt="Smiley face" id="imgLogo" />
+	</div>
+</h:body>
+</html>
