@@ -9,8 +9,11 @@ public enum Request {
 			+ " administrator FROM binome36.USERS WHERE id=?;"),
 
 	EXIST_USER("SELECT id, lastName, firstName, login, password, email, age,"
-			+ " administrator FROM binome36.USERS WHERE firstName=? and lastname=?;"),
+			+ " administrator FROM binome36.USERS WHERE login=? and password=?;"),
 
+	EXIST_ADMIN("SELECT id, lastName, firstName, login, password, email, age,"
+			+ " administrator FROM binome36.USERS WHERE login=? and password=? and administrator=1;"),
+					
 	INSERT_USER("INSERT INTO binome36.USERS"
 			+ "(id, lastName, firstName, login, password, email, age, administrator)"
 			+ "VALUES(null, ?, ?, ?, ?, ?, ?, 0);"),

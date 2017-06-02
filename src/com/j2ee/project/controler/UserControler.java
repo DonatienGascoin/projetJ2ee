@@ -1,31 +1,47 @@
 package com.j2ee.project.controler;
 
+import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
+import java.util.Map;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import com.j2ee.project.bean.UserBean;
 import com.j2ee.project.dao.UserDao;
+import com.mysql.jdbc.Util;
+import com.sun.xml.internal.bind.CycleRecoverable.Context;
 
 @ManagedBean
 @SessionScoped
 public class UserControler {
 
+	UserBean UserBean;
+	
 	public boolean addUser(UserBean user) {
+		
 		UserDao userDao = UserDao.getInstance();
-
-		boolean rs = userDao.add(user.getFirstName(), user.getLastName(), user.getAge(), user.getLogin(),
-				user.getEmail(), user.getPassword());
-
+		
+		boolean rs = userDao.add(user.getFirstName(), user.getLastName(),
+				user.getAge(), user.getLogin(), user.getEmail(),
+				user.getPassword());
+		
 		return rs;
 	}
 
 	public boolean editUser(UserBean user) {
 		UserDao userDao = UserDao.getInstance();
 
-		boolean rs = userDao.edit(user.getId(), user.getFirstName(), user.getLastName(), user.getAge(),
-				user.getLogin(), user.getEmail(), user.getPassword(), user.isAdministrator());
+		boolean rs = userDao.edit(user.getId(), user.getFirstName(),
+				user.getLastName(), user.getAge(), user.getLogin(),
+				user.getEmail(), user.getPassword(), user.isAdministrator());
 
 		return rs;
 	}
@@ -46,13 +62,33 @@ public class UserControler {
 		return user;
 	}
 
-	public UserBean connectUser(String firstName, String lastName) {
+	public void connectUser(String login, String password) {
 		UserDao userDao = UserDao.getInstance();
 
-		UserBean user = userDao.connectUser(firstName, lastName);
+		UserBean user = userDao.connectUser(login, password);
 
-		return user;
+		if (user == null){
+			this.logout();
+		}else{
+			Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+			sessionMap.put("userBean", user);
+		}
 	}
+	
+	public void connectAdmin(String login, String password) throws IOException {
+		UserDao userDao = UserDao.getInstance();
+
+		UserBean user = userDao.connectAdmin(login, password);
+
+		if (user != null){
+			this.redirectTo("adminIndex");
+			Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+			sessionMap.put("userBean", user);
+		}else{
+			this.logout();
+		}
+	}
+
 
 	/**
 	 * To test
@@ -60,8 +96,8 @@ public class UserControler {
 	 */
 	public static void main(String[] args) {
 		UserControler uc = new UserControler();
-		UserBean user = new UserBean("Donatien", "Gascoin", 22, "donatien.gascoin@gmail.com", "Dodo",
-				"dodo95");
+		UserBean user = new UserBean("Donatien", "Gascoin", 22,
+				"donatien.gascoin@gmail.com", "Dodo", "dodo95");
 		boolean addUser = uc.addUser(user);
 		System.out.println("User add: " + addUser);
 
@@ -77,4 +113,22 @@ public class UserControler {
 		System.out.println("User edited:" + user);
 
 	}
+	
+	public void logout(){
+		
+		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> test = context.getSessionMap();
+		test.clear();
+	}
+	
+	// method to redirect to other page
+    public void redirectTo(String page) {
+    	ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+    	context.getFlash().setKeepMessages(true);
+        try {
+			context.redirect(context.getRequestContextPath() + "/composite/" + page + ".jsf");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
 }

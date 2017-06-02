@@ -2,9 +2,9 @@
 
 .footer{
 	height:10%;
-	width:100%;
+	width:95%;
 	bottom:0;
-	position:absolute;
+	position:fixed;
 }
 
 #imgLogo{
@@ -14,20 +14,24 @@
 
 #buttonMenu{
 	height:80%;
-	width:25%;
-	display: ;
+	width:100%;
 }
 
 #emergency{
 	background-color: orange;
+	float:left;
+	width:49%;
 }
 
 #recipes{
-	background-color: blue;
+	background-color: teal;
+	float:right;
+	width:49%;
 }
 
 #shop{
 	background-color: green;
+	width:100%;
 }
 
 .buttonClick{
@@ -68,4 +72,35 @@ label
 #tableForm{
 	padding:20px;
 	border:solid;
+	box-shadow:1px 1px 12px #555;
+}
+
+.left{
+	float:left;
+}
+
+.right{
+	float:right;
+}
+
+#leftMenu{
+	width: 66%;
+}
+
+#rightMenu{
+	width:33%;
+}
+
+.buttonMenu{
+	box-shadow:1px 1px 12px #555;	
+	height:500px;
+	line-height: 500px;
+	text-align: center;
+	font-size: 32px;
+	margin-top:40px;
+	
+	-webkit-transform: rotate(340deg);
+	-moz-transform: rotate(340deg);
+	-o-transform: rotate(340deg);
+	writing-mode: lr-tb;
 }
