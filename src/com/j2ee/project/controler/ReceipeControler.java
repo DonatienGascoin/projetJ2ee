@@ -10,6 +10,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import com.j2ee.project.bean.RecipesList;
+import javax.faces.bean.SessionScoped;
+
 import com.j2ee.project.bean.ReceipeBean;
 import com.j2ee.project.dao.ReceipeDao;
 
