@@ -1,0 +1,143 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	template="../template/adminPage.xhtml">
+
+	<ui:define name="optionalCSS">
+		<link rel="stylesheet" href="../css/showReiceipeResult.css" />
+	</ui:define>
+
+	<ui:define name="sectionHeaderActivity">
+		<div id="headerActivity" style="background-color: orange">
+			Administration</div>
+	</ui:define>
+
+	<ui:define name="adminContent">
+		<h1>Available receipes</h1>
+		<p:dataGrid var="recipetmp" id="dataTable"
+			value="#{allRecipes.recipes}" columns="3" rows="12" paginator="true"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="9,12,15">
+
+			<p:panel style="text-align:center">
+				<h:panelGrid columns="1">
+					<div class="infos">
+						<table>
+							<tr>
+								<td><img src="../img/type_cuisine.png" alt="Cuisine"
+									class="imgLogo" /></td>
+								<td>#{recipetmp.type}</td>
+							</tr>
+							<tr>
+								<td><img src="../img/horloge.png" alt="Horloge"
+									class="imgLogo" /></td>
+								<td>#{recipetmp.researchDuration}</td>
+							</tr>
+							<tr>
+								<td><img src="../img/nbPersons.png" alt="Nb personnes"
+									class="imgLogo" /></td>
+								<td>#{recipetmp.nbPersons} p</td>
+							</tr>
+						</table>
+					</div>
+					<div class="resume">
+						<h3>#{recipetmp.name}</h3>
+						<p>
+							<span>Resume:</span><br /> #{recipetmp.resume}
+							<p:rating value="#{recipetmp.complexity}" readonly="true" />
+
+							<p:commandButton value="Edit" id="edit" update=":editRecipe"
+								ajax="true" oncomplete="PF('dlg').show();">
+								<f:setPropertyActionListener value="#{recipetmp}"
+									target="#{allRecipes.selectedRecipe}" />
+							</p:commandButton>
+
+							<p:commandButton value="Delete" id="delete"
+								actionListener="#{recipeControler.deleteRecipe(recipetmp)}">
+								<p:confirm header="Confirmation" message="Are you sure?"
+									icon="ui-icon-alert" />
+							</p:commandButton>
+						</p>
+					</div>
+				</h:panelGrid>
+			</p:panel>
+		</p:dataGrid>
+
+
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+			<p:commandButton value="Yes" type="button"
+				styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+			<p:commandButton value="No" type="button"
+				styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+		</p:confirmDialog>
+
+
+		<p:dialog header="Edit recipe" widgetVar="dlg" modal="true"
+			height="400">
+			<h:form style="margin-top:10px;" id="editRecipe">
+				<div class=""></div>
+				<h:panelGrid columns="2" cellpadding="0" cellspacing="0"
+					style="margin:auto;width:80%;">
+
+					<h:panelGrid columns="1" style="margin:auto;margin-bottom: 10px;">
+						<h:panelGrid columns="2">
+							<p:graphicImage id="imgHorloge" style="height:25px;width:25px;"
+								value="../img/horloge.png" alt="Horloge" />
+							<p:outputLabel for="duration" value="Preparation Duration: " />
+						</h:panelGrid>
+						<p:inputMask id="duration"
+							value="#{allRecipes.selectedRecipe.researchDuration}"
+							mask="99:99" />
+					</h:panelGrid>
+
+					<h:panelGrid columns="1" style="margin:auto;margin-bottom: 10px;">
+						<h:panelGrid columns="2">
+							<p:graphicImage id="imgNote" style="height:25px;width:25px;"
+								value="../img/note.png" alt="Note Expertise" />
+							<h:outputText value="Cook Expertise:" />
+						</h:panelGrid>
+						<p:rating value="#{allRecipes.selectedRecipe.complexity}" />
+					</h:panelGrid>
+
+					<h:panelGrid columns="1" style="margin:auto;margin-bottom: 10px;">
+						<h:panelGrid columns="2">
+							<p:graphicImage id="imgNbPeople" style="height:25px;width:25px;"
+								value="../img/nbPersons.png" alt="People number" />
+							<h:outputText value="For how many people:" />
+						</h:panelGrid>
+						<p:inputText id="numberPeople"
+							value="#{allRecipes.selectedRecipe.nbPersons}" />
+						<p:slider for="numberPeople" />
+					</h:panelGrid>
+
+					<h:panelGrid columns="1" style="margin:auto;margin-bottom: 10px;">
+						<h:panelGrid columns="2">
+							<p:graphicImage id="imgTypeCook" style="height:25px;width:25px;"
+								value="../img/type_cuisine.png" alt="Type_cuisine" />
+							<p:outputLabel for="cooktype" value="Cook Type:" />
+						</h:panelGrid>
+						<p:selectOneListbox id="cooktype"
+							value="#{allRecipes.selectedRecipe.type}">
+							<f:selectItem itemLabel="Salad" itemValue="Salad" />
+							<f:selectItem itemLabel="Meal" itemValue="Meal" />
+							<f:selectItem itemLabel="Fish" itemValue="Fish" />
+							<f:selectItem itemLabel="Desert" itemValue="Desert" />
+						</p:selectOneListbox>
+					</h:panelGrid>
+
+				</h:panelGrid>
+				<div class="submit">
+					<p:commandButton value="Save recipe" id="save"
+						action="#{recipeControler.editRecipe(allRecipes.selectedRecipe)}"
+						update=":dataTable" oncomplete="PF('dlg').hide();"
+						style="background-color: teal; width: 100%;">
+					</p:commandButton>
+				</div>
+			</h:form>
+		</p:dialog>
+	</ui:define>
+
+</ui:composition>

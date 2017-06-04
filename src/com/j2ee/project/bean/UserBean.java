@@ -8,6 +8,9 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class UserBean implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	private int id;
 	private String firstName;
 	private String lastName;

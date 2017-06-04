@@ -1,0 +1,35 @@
+.content {
+	width: 80%;
+	margin: auto;
+}
+
+.content h1{
+	text-align: center;
+}
+
+.content #listUser {
+	width: 40%;
+	float: left;
+}
+
+.content #editUser {
+	margin-left: 60%;
+	width: 40%;
+}
+
+.table-style{
+	border:solid;
+}
+
+.heading-style{
+	background-color: black;
+	color: white;
+}
+
+.rowA{
+	background-color: white;
+}
+
+.rowB{
+	background-color: #689AFF;
+}

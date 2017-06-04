@@ -21,6 +21,12 @@ public enum Request {
 	UPDATE_USER("UPDATE binome36.USERS "
 			+ "SET lastName=?, firstName=?, login=?, password=?, email=?, age=?, administrator=? "
 			+ "WHERE id=?;"),
+
+	ADMIN_UPDATE_USER("UPDATE binome36.USERS "
+			+ "SET lastName=?, firstName=?, login=?, email=?, age=?, administrator=? "
+			+ "WHERE id=?;"),
+
+	DELETE_USER("DELETE FROM binome36.USERS WHERE id=?;"),
 	
 	SELECT_ALL_RECEIPT("SELECT `id`, `name`, `resume`, `details`, `nbPersons`, `complexity`, `type`, `image`, `duration` FROM binome36.RECEIPE"),
 	
@@ -35,6 +41,8 @@ public enum Request {
 	UPDATE_RECEIPE("UPDATE binome36.RECEIPE"
 			+ " SET `name`=?,`resume`=?,`details`=?,`nbPersons`=?,`complexity`=?,`type`=?, `image`=?, `duration`=?"
 			+ " WHERE id=?"),
+	
+	DELETE_RECEIPE("DELETE FROM binome36.RECEIPE WHERE id=?"),
 			
 	INSERT_NOTE("INSERT INTO binome36.NOTE (id, idReceipe, title, note, idUser)"
 			+ " VALUES"

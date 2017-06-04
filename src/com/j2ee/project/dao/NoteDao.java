@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.j2ee.project.bean.NoteBean;
-import com.j2ee.project.bean.ReceipeBean;
+import com.j2ee.project.bean.RecipeBean;
 
 public class NoteDao extends Dao {
 
@@ -27,8 +27,8 @@ public class NoteDao extends Dao {
 		return noteDao;
 	}
 
-	public ReceipeBean getReceipe(int id) {
-		ReceipeBean receipe = null;
+	public RecipeBean getReceipe(int id) {
+		RecipeBean receipe = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 
@@ -42,7 +42,7 @@ public class NoteDao extends Dao {
 			ResultSet rs = querySt.executeQuery();
 			// Only one result
 			if (rs.next()) {
-				receipe = new ReceipeBean();
+				receipe = new RecipeBean();
 				receipe.setId(rs.getInt("id"));
 				receipe.setDetails(rs.getString("details"));
 				receipe.setName(rs.getString("name"));

@@ -14,8 +14,8 @@ Creation User
 
 	<ui:define name="sectionContent">
 		<div id="createUserForm">
-			<table id="tableForm">
-				<h:form id="createUser">
+			<h:form id="createUser">
+				<table id="tableForm">
 
 					<tr>
 						<td><label>First Name : </label></td>
@@ -39,7 +39,8 @@ Creation User
 
 					<tr>
 						<td><label>Age : </label></td>
-						<td><h:inputText id="age" name="age" required="true" value="#{userBean.age}">
+						<td><h:inputText id="age" name="age" required="true"
+								value="#{userBean.age}">
 								<f:validator validatorId="check.age" />
 							</h:inputText></td>
 						<td><h:message for="age" showDetail="true" style="color:red" />
@@ -48,7 +49,8 @@ Creation User
 
 					<tr>
 						<td><label>Mail : </label></td>
-						<td><h:inputText id="mail" name="mail" required="true" value="#{userBean.email}">
+						<td><h:inputText id="mail" name="mail" required="true"
+								value="#{userBean.email}">
 								<f:validator validatorId="check.mail" />
 							</h:inputText></td>
 						<td><h:message for="mail" showDetail="true" style="color:red" />
@@ -57,7 +59,8 @@ Creation User
 
 					<tr>
 						<td><label>Login : </label></td>
-						<td><h:inputText id="login" name="login" required="true" value="#{userBean.login}">
+						<td><h:inputText id="login" name="login" required="true"
+								value="#{userBean.login}">
 								<f:validator validatorId="check.login" />
 							</h:inputText></td>
 						<td><h:message for="login" showDetail="true"
@@ -66,8 +69,9 @@ Creation User
 
 					<tr>
 						<td><label>Password : </label></td>
-						<td><h:inputSecret id="pwd" name="pwd" required="true" binding="#{pwdTest}">
-								<f:validator validatorId="check.pwd" />								 
+						<td><h:inputSecret id="pwd" name="pwd" required="true"
+								binding="#{pwdTest}">
+								<f:validator validatorId="check.pwd" />
 							</h:inputSecret></td>
 						<td><h:message for="pwd" showDetail="true" style="color:red" />
 						</td>
@@ -75,9 +79,10 @@ Creation User
 
 					<tr>
 						<td><label>Password 2 : </label></td>
-						<td><h:inputSecret id="pwd2" name="pwd2" required="true" value="#{userBean.password}">
+						<td><h:inputSecret id="pwd2" name="pwd2" required="true"
+								value="#{userBean.password}">
 								<f:validator validatorId="check.pwd2" />
-								<f:attribute name="pwdTest" value="#{pwdTest}" /> 
+								<f:attribute name="pwdTest" value="#{pwdTest}" />
 							</h:inputSecret></td>
 						<td><h:message for="pwd2" showDetail="true" style="color:red" />
 						</td>
@@ -85,15 +90,16 @@ Creation User
 					<br />
 					<tr>
 						<td><h:commandButton id="submitUserCreate"
-								name="submitUserCreate" value="Register" action="#{userControler.addUser(userBean)}" ></h:commandButton></td>
+								name="submitUserCreate" value="Create User"
+								action="#{userControler.addUser(userBean)}"></h:commandButton></td>
 					</tr>
 
 					<tr>
 						<td><a href="../menu.jsf"><h:button id="cancelUserCreate"
 									name="cancelUserCreate" value="Cancel"></h:button></a></td>
 					</tr>
-				</h:form>
-			</table>
+				</table>
+			</h:form>
 		</div>
 	</ui:define>
 

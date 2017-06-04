@@ -26,8 +26,7 @@ public class UserDao extends Dao {
 		return userDao;
 	}
 
-	public boolean add(String firstName, String lastName, int age,
-			String login, String email, String password) {
+	public boolean add(String firstName, String lastName, int age, String login, String email, String password) {
 		boolean result = false;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -37,9 +36,8 @@ public class UserDao extends Dao {
 
 			Statement query = conn.createStatement();
 
-			PreparedStatement querySt = conn
-					.prepareStatement(Request.INSERT_USER.getQuery());
-			// DÃ©finition de la valeur des paramÃ¨tres
+			PreparedStatement querySt = conn.prepareStatement(Request.INSERT_USER.getQuery());
+			// Définition de la valeur des paramètres
 			querySt.setString(1, lastName);
 			querySt.setString(2, firstName);
 			querySt.setString(3, login);
@@ -47,7 +45,7 @@ public class UserDao extends Dao {
 			querySt.setString(5, email);
 			querySt.setInt(6, age);
 
-			// ExÃ©cution
+			// Exécution
 			int rs = querySt.executeUpdate();
 			if (rs == 1) {
 				result = true;
@@ -63,8 +61,8 @@ public class UserDao extends Dao {
 		return result;
 	}
 
-	public boolean edit(int id, String firstName, String lastName, int age,
-			String login, String email, String password, boolean administrator) {
+	public boolean edit(int id, String firstName, String lastName, int age, String login, String email, String password,
+			boolean administrator) {
 		boolean result = false;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -74,9 +72,8 @@ public class UserDao extends Dao {
 
 			Statement query = conn.createStatement();
 
-			PreparedStatement querySt = conn
-					.prepareStatement(Request.UPDATE_USER.getQuery());
-			// DÃ©finition de la valeur des paramÃ¨tres
+			PreparedStatement querySt = conn.prepareStatement(Request.UPDATE_USER.getQuery());
+			// Définition de la valeur des paramètres
 			querySt.setString(1, lastName);
 			querySt.setString(2, firstName);
 			querySt.setString(3, login);
@@ -87,7 +84,7 @@ public class UserDao extends Dao {
 			// Where clause
 			querySt.setInt(8, id);
 
-			// ExÃ©cution
+			// Exécution
 			int rs = querySt.executeUpdate();
 			if (rs == 0) {
 				result = true;
@@ -112,15 +109,15 @@ public class UserDao extends Dao {
 			conn = DriverManager.getConnection(url, user, passwd);
 
 			Statement query = conn.createStatement();
-			// Executer puis parcourir les rÃ©sultats
-			ResultSet rs = query.executeQuery(Request.SELECT_ALL_USERS
-					.getQuery());
+			// Executer puis parcourir les résultats
+			ResultSet rs = query.executeQuery(Request.SELECT_ALL_USERS.getQuery());
 
 			while (rs.next()) {
 				UserBean user = new UserBean();
 				user.setId(rs.getInt("id"));
 				user.setFirstName(rs.getString("firstName"));
 				user.setLastName(rs.getString("lastName"));
+				user.setLogin(rs.getString("login"));
 				user.setAge(rs.getInt("age"));
 				user.setEmail(rs.getString("email"));
 				user.setAdministrator(rs.getBoolean("administrator"));
@@ -148,9 +145,8 @@ public class UserDao extends Dao {
 			Connection conn;
 			conn = DriverManager.getConnection(url, user, passwd);
 
-			PreparedStatement querySt = conn
-					.prepareStatement(Request.SELECT_USER.getQuery());
-			// DÃ©finition de la valeur des paramÃ¨tres
+			PreparedStatement querySt = conn.prepareStatement(Request.SELECT_USER.getQuery());
+			// Définition de la valeur des paramètres
 			querySt.setInt(1, userId);
 
 			ResultSet rs = querySt.executeQuery();
@@ -186,9 +182,8 @@ public class UserDao extends Dao {
 			Connection conn;
 			conn = DriverManager.getConnection(url, user, passwd);
 
-			PreparedStatement querySt = conn
-					.prepareStatement(Request.EXIST_USER.getQuery());
-			// DÃ©finition de la valeur des paramÃ¨tres
+			PreparedStatement querySt = conn.prepareStatement(Request.EXIST_USER.getQuery());
+			// Définition de la valeur des paramètres
 			querySt.setString(1, login);
 			querySt.setString(2, password);
 
@@ -217,7 +212,7 @@ public class UserDao extends Dao {
 		}
 		return userB;
 	}
-	
+
 	public UserBean connectAdmin(String login, String password) {
 		UserBean userB = null;
 		try {
@@ -226,9 +221,8 @@ public class UserDao extends Dao {
 			Connection conn;
 			conn = DriverManager.getConnection(url, user, passwd);
 
-			PreparedStatement querySt = conn
-					.prepareStatement(Request.EXIST_ADMIN.getQuery());
-			// DÃ©finition de la valeur des paramÃ¨tres
+			PreparedStatement querySt = conn.prepareStatement(Request.EXIST_ADMIN.getQuery());
+			// Définition de la valeur des paramètres
 			querySt.setString(1, login);
 			querySt.setString(2, password);
 
@@ -256,6 +250,74 @@ public class UserDao extends Dao {
 			e.printStackTrace();
 		}
 		return userB;
+	}
+
+	public boolean delete(int id) {
+		boolean result = false;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+
+			Connection conn;
+			conn = DriverManager.getConnection(url, user, passwd);
+
+			Statement query = conn.createStatement();
+
+			PreparedStatement querySt = conn.prepareStatement(Request.DELETE_USER.getQuery());
+			// Définition de la valeur des paramètres
+			querySt.setInt(1, id);
+
+			// Exécution
+			int rs = querySt.executeUpdate();
+			if (rs == 0) {
+				result = true;
+			}
+			query.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public boolean adminEditUser(int id, String firstName, String lastName, int age, String login, String email,
+			boolean administrator) {
+		boolean result = false;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+
+			Connection conn;
+			conn = DriverManager.getConnection(url, user, passwd);
+
+			Statement query = conn.createStatement();
+
+			PreparedStatement querySt = conn.prepareStatement(Request.ADMIN_UPDATE_USER.getQuery());
+			// Définition de la valeur des paramètres
+			querySt.setString(1, lastName);
+			querySt.setString(2, firstName);
+			querySt.setString(3, login);
+			querySt.setString(4, email);
+			querySt.setInt(5, age);
+			querySt.setBoolean(6, administrator);
+			// Where clause
+			querySt.setInt(7, id);
+
+			// Exécution
+			int rs = querySt.executeUpdate();
+			if (rs == 0) {
+				result = true;
+			}
+			query.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }

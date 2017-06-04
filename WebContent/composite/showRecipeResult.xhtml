@@ -1,0 +1,125 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/template.xhtml">
+
+	<ui:define name="optionalCSS">
+		<link rel="stylesheet" href="../css/showReiceipeResult.css" />
+	</ui:define>
+
+	<ui:define name="sectionTitle">
+		Recipes
+	</ui:define>
+
+	<ui:define name="sectionHeaderActivity">
+		<div id="headerActivity" style="background-color: teal;">Recipe</div>
+	</ui:define>
+
+	<ui:define name="sectionContent">
+		<h1>Available recipes</h1>
+		<h4>Click on recipe name to view details.</h4>
+		<p:dataGrid var="recipetmp" id="dataTable"
+			value="#{currentRecipeResearch.recipes}" columns="3" rows="12"
+			paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="9,12,15">
+
+			<p:panel style="text-align:center">
+				<h:panelGrid columns="1">
+					<div class="infos">
+						<table>
+							<tr>
+								<td><img src="../img/type_cuisine.png" alt="Cuisine"
+									class="imgLogo" /></td>
+								<td>#{recipetmp.type}</td>
+							</tr>
+							<tr>
+								<td><img src="../img/horloge.png" alt="Horloge"
+									class="imgLogo" /></td>
+								<td>#{recipetmp.researchDuration}</td>
+							</tr>
+							<tr>
+								<td><img src="../img/nbPersons.png" alt="Nb personnes"
+									class="imgLogo" /></td>
+								<td>#{recipetmp.nbPersons} p</td>
+							</tr>
+						</table>
+					</div>
+					<div class="resume">
+						<h3>#{recipetmp.name}</h3>
+						<p>
+							<span>Resume:</span><br /> #{recipetmp.resume}
+							<p:rating value="#{recipetmp.complexity}" readonly="true" />
+						</p>
+					</div>
+					<h3>
+						<p:commandButton value="View details" id="edit"
+							update=":showRecipe" ajax="true" oncomplete="PF('dlg').show();">
+							<f:setPropertyActionListener value="#{recipetmp}"
+								target="#{currentRecipeResearch.selectedRecipe}" />
+						</p:commandButton>
+
+					</h3>
+
+				</h:panelGrid>
+			</p:panel>
+		</p:dataGrid>
+
+		<p:dialog header="Details" widgetVar="dlg" modal="true" height="500"
+			width="80%">
+			<div class=""></div>
+			<h:panelGrid columns="1" cellpadding="0" cellspacing="0"
+				id="showRecipe" style="margin:auto;width:90%;">
+				<h2 style="text-align: center;">#{currentRecipeResearch.selectedRecipe.name}</h2>
+				<h:panelGrid columns="8">
+					<h:panelGrid columns="2">
+						<p:graphicImage id="imgHorloge" style="height:25px;width:25px;"
+							value="../img/horloge.png" alt="Horloge" />
+						<h:outputText id="duration"
+							value="Duration: #{currentRecipeResearch.selectedRecipe.researchDuration}"
+							mask="99:99" />
+					</h:panelGrid>
+
+
+					<h:panelGrid columns="2">
+						<p:graphicImage id="imgNote"
+							style="height:25px;width:25px;margin-left:30px;"
+							value="../img/note.png" alt="Note Expertise" />
+						<h:outputText value="Cook Expertise:" />
+					</h:panelGrid>
+					<p:rating
+						value="#{currentRecipeResearch.selectedRecipe.complexity}"
+						readonly="true" />
+
+					<h:panelGrid columns="2">
+						<p:graphicImage id="imgNbPeople"
+							style="height:25px;width:25px;margin-left:30px;"
+							value="../img/nbPersons.png" alt="People number" />
+						<h:outputText id="numberPeople"
+							value="For how many people: #{currentRecipeResearch.selectedRecipe.nbPersons}" />
+					</h:panelGrid>
+
+					<h:panelGrid columns="2">
+						<p:graphicImage id="imgTypeCook"
+							style="height:25px;width:25px;margin-left:30px;"
+							value="../img/type_cuisine.png" alt="Type_cuisine" />
+						<h:outputText id="cooktype"
+							value="Cook Type: #{currentRecipeResearch.selectedRecipe.type}" />
+					</h:panelGrid>
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<h:panelGrid columns="2">
+						<p:graphicImage id="detailCook" style="height:25px;width:25px;"
+							value="../img/type_cuisine.png" alt="Type_cuisine" />
+						<h:outputText id="details"
+							value="Details: #{currentRecipeResearch.selectedRecipe.details}" />
+					</h:panelGrid>
+				</h:panelGrid>
+			</h:panelGrid>
+		</p:dialog>
+	</ui:define>
+
+</ui:composition>

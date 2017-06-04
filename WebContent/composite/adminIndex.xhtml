@@ -1,45 +1,26 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:c="http://java.sun.com/jsp/jstl/core">
-<h:head>
-	<meta charset="UTF-8" />
-	<title>Administration</title>
-	<link rel="stylesheet" href="../css/styleTemplate.css" />
-	<link rel="stylesheet" href="../css/menu.css" />
-	<link rel="stylesheet" href="../css/general.css" />
-</h:head>
-<h:body>
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	template="../template/adminPage.xhtml">
 
-	<div class="header">
-		<div id="headerActivity" style="background-color: red">
+	<ui:define name="sectionHeaderActivity">
+		<div id="headerActivity" style="background-color: orange">
 			Administration</div>
-	</div>
+	</ui:define>
 
-	<div class="content">
-		<c:set var="val" value="#{userBean.administrator}" />
+	<ui:define name="adminContent">
 		<div id="logAdminForm">
-			<c:if test="${val == true}">
+			<h:form id="logAdmin">
+				<h:commandButton id="adminUser" name="adminUser"
+					value="Manage users"
+					action="#{userControler.redirectTo('adminUsers')}"></h:commandButton>
 
-				<h:form id="logAdmin">
-					<h:commandButton id="adminUser" name="adminUser"
-						value="Manage users"
-						action="#{userControler.redirectTo('adminUser')}"></h:commandButton>
-
-					<h:commandButton id="adminReceipe" name="adminReceipe"
-						value="Manage receipes"
-						action="#{userControler.redirectTo('adminReceipe')}"></h:commandButton>
-				</h:form>
-			</c:if>
-			<c:if test="${val == false}">
-		Vous n'êtes pas administrateur !!
-		</c:if>
+				<h:commandButton id="adminReceipe" name="adminReceipe"
+					value="Manage receipes" action="#{recipeControler.manageRecipe()}"></h:commandButton>
+			</h:form>
 		</div>
-	</div>
+	</ui:define>
 
-	<div class="footer">
-		<span id="copyright">Copyright 2017 all right reserved</span> <img
-			src="../img/background.jpeg" alt="Smiley face" id="imgLogo" />
-	</div>
-</h:body>
-</html>
+</ui:composition>

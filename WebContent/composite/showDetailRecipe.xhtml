@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/template.xhtml">
+
+	<ui:define name="optionalCSS">
+		<link rel="stylesheet" href="../css/showReiceipeResult.css" />
+	</ui:define>
+
+	<ui:define name="sectionTitle">
+Creation User
+</ui:define>
+
+	<ui:define name="sectionHeaderActivity">
+		<div id="headerActivity" style="background-color: teal;">
+			Receipe</div>
+	</ui:define>
+
+	<ui:define name="sectionContent">
+		<h1>Recipe detail</h1>
+
+		<h:panelGrid columns="1">
+			<div class="infos">
+				<table>
+					<tr>
+						<td><img src="../img/type_cuisine.png" alt="Cuisine"
+							class="imgLogo" /></td>
+						<td>#{recipetmp.type}</td>
+					</tr>
+					<tr>
+						<td><img src="../img/horloge.png" alt="Horloge"
+							class="imgLogo" /></td>
+						<td>#{recipetmp.researchDuration}</td>
+					</tr>
+					<tr>
+						<td><img src="../img/nbPersons.png" alt="Nb personnes"
+							class="imgLogo" /></td>
+						<td>#{recipetmp.nbPersons} p</td>
+					</tr>
+				</table>
+			</div>
+			<div class="resume">
+				<h3>
+					<a href="showDetailRecipe.jsf?id=#{recipetmp.id}">#{recipetmp.name}</a>
+				</h3>
+				<p>
+					<span>Resume:</span><br /> #{recipetmp.resume}
+					<p:rating value="#{recipetmp.complexity}" readonly="true" />
+				</p>
+			</div>
+
+		</h:panelGrid>
+
+	</ui:define>
+
+</ui:composition>

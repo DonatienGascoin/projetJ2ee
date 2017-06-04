@@ -9,19 +9,19 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.j2ee.project.bean.ReceipeBean;
+import com.j2ee.project.bean.RecipeBean;
 
-public class ReceipeDao extends Dao {
+public class RecipeDao extends Dao {
 
-	private static ReceipeDao userDao;
+	private static RecipeDao userDao;
 
-	private ReceipeDao() {
+	private RecipeDao() {
 
 	}
 
-	public static ReceipeDao getInstance() {
+	public static RecipeDao getInstance() {
 		if (null == userDao) {
-			userDao = new ReceipeDao();
+			userDao = new RecipeDao();
 		}
 		return userDao;
 	}
@@ -103,8 +103,8 @@ public class ReceipeDao extends Dao {
 		return result;
 	}
 
-	public List<ReceipeBean> getAll() {
-		List<ReceipeBean> receiptList = new ArrayList<ReceipeBean>();
+	public List<RecipeBean> getAll() {
+		List<RecipeBean> recipeList = new ArrayList<RecipeBean>();
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 
@@ -116,18 +116,18 @@ public class ReceipeDao extends Dao {
 			ResultSet rs = query.executeQuery(Request.SELECT_ALL_RECEIPT.getQuery());
 
 			while (rs.next()) {
-				ReceipeBean receipe = new ReceipeBean();
-				receipe.setId(rs.getInt("id"));
-				receipe.setDetails(rs.getString("details"));
-				receipe.setName(rs.getString("name"));
-				receipe.setComplexity(rs.getInt("complexity"));
-				receipe.setNbPersons(rs.getInt("nbPersons"));
-				receipe.setResume(rs.getString("resume"));
-				receipe.setType(rs.getString("type"));
-				receipe.setImage(rs.getString("image"));
-				receipe.setDuration(rs.getInt("duration"));
+				RecipeBean recipe = new RecipeBean();
+				recipe.setId(rs.getInt("id"));
+				recipe.setDetails(rs.getString("details"));
+				recipe.setName(rs.getString("name"));
+				recipe.setComplexity(rs.getInt("complexity"));
+				recipe.setNbPersons(rs.getInt("nbPersons"));
+				recipe.setResume(rs.getString("resume"));
+				recipe.setType(rs.getString("type"));
+				recipe.setImage(rs.getString("image"));
+				recipe.setDuration(rs.getInt("duration"));
 
-				receiptList.add(receipe);
+				recipeList.add(recipe);
 			}
 
 			rs.close();
@@ -139,11 +139,11 @@ public class ReceipeDao extends Dao {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		return receiptList;
+		return recipeList;
 	}
 
-	public ReceipeBean getReceipe(int id) {
-		ReceipeBean receipe = null;
+	public RecipeBean getRecipe(int id) {
+		RecipeBean recipe = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 
@@ -156,16 +156,16 @@ public class ReceipeDao extends Dao {
 			ResultSet rs = querySt.executeQuery();
 			// Only one result
 			if (rs.next()) {
-				receipe = new ReceipeBean();
-				receipe.setId(rs.getInt("id"));
-				receipe.setDetails(rs.getString("details"));
-				receipe.setName(rs.getString("name"));
-				receipe.setComplexity(rs.getInt("complexity"));
-				receipe.setNbPersons(rs.getInt("nbPersons"));
-				receipe.setResume(rs.getString("resume"));
-				receipe.setType(rs.getString("type"));
-				receipe.setImage(rs.getString("image"));
-				receipe.setDuration(rs.getInt("duration"));
+				recipe = new RecipeBean();
+				recipe.setId(rs.getInt("id"));
+				recipe.setDetails(rs.getString("details"));
+				recipe.setName(rs.getString("name"));
+				recipe.setComplexity(rs.getInt("complexity"));
+				recipe.setNbPersons(rs.getInt("nbPersons"));
+				recipe.setResume(rs.getString("resume"));
+				recipe.setType(rs.getString("type"));
+				recipe.setImage(rs.getString("image"));
+				recipe.setDuration(rs.getInt("duration"));
 			}
 
 			rs.close();
@@ -177,11 +177,11 @@ public class ReceipeDao extends Dao {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		return receipe;
+		return recipe;
 	}
 
-	public List<ReceipeBean> getReceipe(int duration, int complexity, int nbPersons, String type) {
-		List<ReceipeBean> receipes = new ArrayList<>();
+	public List<RecipeBean> getRecipe(int duration, int complexity, int nbPersons, String type) {
+		List<RecipeBean> receipes = new ArrayList<>();
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 
@@ -197,7 +197,7 @@ public class ReceipeDao extends Dao {
 			ResultSet rs = querySt.executeQuery();
 			// Only one result
 			while (rs.next()) {
-				ReceipeBean receipe = new ReceipeBean();
+				RecipeBean receipe = new RecipeBean();
 				receipe.setId(rs.getInt("id"));
 				receipe.setDetails(rs.getString("details"));
 				receipe.setName(rs.getString("name"));
@@ -221,5 +221,36 @@ public class ReceipeDao extends Dao {
 			e.printStackTrace();
 		}
 		return receipes;
+	}
+
+	public boolean delete(int recipeId) {
+		boolean result = false;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+
+			Connection conn;
+			conn = DriverManager.getConnection(url, user, passwd);
+
+			Statement query = conn.createStatement();
+
+			PreparedStatement querySt = conn.prepareStatement(Request.DELETE_RECEIPE.getQuery());
+			// Definition de la valeur des parametres
+			querySt.setInt(1, recipeId);
+
+			// Execution
+			int rs = querySt.executeUpdate();
+			if (rs == 0) {
+				result = true;
+			}
+			query.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return result;
+
 	}
 }

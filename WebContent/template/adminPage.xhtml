@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	template="../template/template.xhtml">
+
+	<ui:define name="sectionTitle">
+		Administration
+	</ui:define>
+
+	<ui:define name="sectionContent">
+		<c:set var="val" value="#{userBean.administrator}" />
+		<c:if test="${val == true}">
+			<ui:insert name="adminContent">Default Admin Content</ui:insert>
+		</c:if>
+		<c:if test="${val == false}">
+			<div id="logAdminForm">Vous n'êtes pas administrateur !!</div>
+		</c:if>
+	</ui:define>
+
+</ui:composition>

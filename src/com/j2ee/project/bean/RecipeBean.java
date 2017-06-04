@@ -7,7 +7,9 @@ import javax.faces.bean.RequestScoped;
 
 @ManagedBean
 @RequestScoped
-public class ReceipeBean implements Serializable {
+public class RecipeBean implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private int id;
 	private String name;
@@ -20,10 +22,10 @@ public class ReceipeBean implements Serializable {
 	private int duration;
 	private String researchDuration;
 
-	public ReceipeBean() {
+	public RecipeBean() {
 	}
 
-	public ReceipeBean(String name, String details, String resume, int nbPersons, int complexity, String type,
+	public RecipeBean(String name, String details, String resume, int nbPersons, int complexity, String type,
 			String image, int duration) {
 		super();
 		this.name = name;
@@ -36,7 +38,7 @@ public class ReceipeBean implements Serializable {
 		this.duration = duration;
 	}
 
-	public ReceipeBean(String name, String details, String resume, int nbPersons, int complexity, String type,
+	public RecipeBean(String name, String details, String resume, int nbPersons, int complexity, String type,
 			String image, String researchDuration) {
 		super();
 		this.name = name;
@@ -49,7 +51,7 @@ public class ReceipeBean implements Serializable {
 		this.researchDuration = researchDuration;
 	}
 
-	public ReceipeBean(int id, String name, String details, String resume, int nbPersons, int complexity, String type,
+	public RecipeBean(int id, String name, String details, String resume, int nbPersons, int complexity, String type,
 			String image, int duration) {
 		super();
 		this.id = id;
@@ -133,6 +135,9 @@ public class ReceipeBean implements Serializable {
 
 	public void setDuration(int duration) {
 		this.duration = duration;
+
+		// Set researchDuration (only for view)
+		setResearchDuration();
 	}
 
 	public String getResearchDuration() {
@@ -142,8 +147,36 @@ public class ReceipeBean implements Serializable {
 	public void setResearchDuration(String researchDuration) {
 		this.researchDuration = researchDuration;
 
-		String[] split = researchDuration.split(":");
-		setDuration(Integer.parseInt(split[0]) * 60 + Integer.parseInt(split[1]));
+		if(researchDuration.isEmpty() == true){
+			setDuration(0);
+		}else{
+			String[] split = researchDuration.split(":");
+			setDuration(Integer.parseInt(split[0]) * 60 + Integer.parseInt(split[1]));			
+		}
+	}
+
+	protected void setResearchDuration() {
+		String researchDuration = "";
+		int duration = this.getDuration();
+
+		int nbHours = duration / 60;
+
+		if (nbHours < 10) {
+			researchDuration = "0" + nbHours;
+		} else {
+			researchDuration = Integer.toString(nbHours);
+		}
+
+		researchDuration += ":";
+
+		int nbMinutes = duration % 60;
+
+		if (nbMinutes < 10) {
+			researchDuration += "0" + nbMinutes;
+		} else {
+			researchDuration += Integer.toString(nbMinutes);
+		}
+		this.researchDuration = researchDuration;
 	}
 
 	@Override
