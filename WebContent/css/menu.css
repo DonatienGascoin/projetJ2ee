@@ -1,104 +1,101 @@
 @CHARSET "UTF-8";
 
-.footer{
-	height:10%;
-	width:95%;
-	bottom:0;
-	position:fixed;
+.footer {
+	height: 10%;
+	width: 95%;
+	bottom: 0;
+	position: fixed;
 }
 
-#imgLogo{
-	width:10%; 
-	float:right;
+#imgLogo {
+	width: 10%;
+	float: right;
 }
 
-#buttonMenu{
-	height:80%;
-	width:100%;
+#buttonMenu {
+	height: 80%;
+	width: 100%;
 }
 
-#emergency{
+#emergency {
 	background-color: orange;
-	float:left;
-	width:49%;
+	float: left;
+	width: 49%;
 }
 
-#recipes{
+#recipes {
 	background-color: teal;
-	float:right;
-	width:49%;
+	float: right;
+	width: 49%;
 }
 
-#shop{
+#shop {
 	background-color: green;
-	width:100%;
+	width: 100%;
 }
 
-.buttonClick{
-
-	display:block;
-	width:100%;
-	height:100%;
+.buttonClick {
+	display: block;
+	width: 100%;
+	height: 100%;
 }
 
-label
-
-{
-    display: block;
-    width: 150px;
-    float: left;
+label {
+	display: block;
+	width: 150px;
+	float: left;
 }
 
-#createUserForm{
-	margin-left: auto;
-  	margin-right: auto;
-  	width: 400px;
-    text-align: center;
-    line-height: 1.5;
+#createUserForm {
+	margin: auto;
+	width: 50%;
+	text-align: center;
+	line-height: 1.5;
 }
 
-
-#submitUserCreate{
-	margin-top:10px;
-	float:right;
+#createUserForm #tableForm {
+	margin: auto;
 }
 
-
-#cancelUserCreate{
-	margin-top:10px;
-	float:left;
+#submitUserCreate {
+	margin-top: 10px;
+	float: right;
 }
 
-#tableForm{
-	padding:20px;
-	border:solid;
-	box-shadow:1px 1px 12px #555;
+#cancelUserCreate {
+	margin-top: 10px;
+	float: left;
 }
 
-.left{
-	float:left;
+#tableForm {
+	padding: 20px;
+	border: solid;
+	box-shadow: 1px 1px 12px #555;
 }
 
-.right{
-	float:right;
+.left {
+	float: left;
 }
 
-#leftMenu{
+.right {
+	float: right;
+}
+
+#leftMenu {
 	width: 66%;
 }
 
-#rightMenu{
-	width:33%;
+#rightMenu {
+	width: 33%;
 }
 
-.buttonMenu{
-	box-shadow:1px 1px 12px #555;	
-	height:500px;
+.buttonMenu {
+	box-shadow: 1px 1px 12px #555;
+	height: 500px;
 	line-height: 500px;
 	text-align: center;
 	font-size: 32px;
-	margin-top:40px;
-	
+	margin-top: 40px;
 	-webkit-transform: rotate(340deg);
 	-moz-transform: rotate(340deg);
 	-o-transform: rotate(340deg);

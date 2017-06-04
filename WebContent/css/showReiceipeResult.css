@@ -18,14 +18,12 @@ h3 a {
 	margin-right: 3%;
 	padding-right: 3%;
 	height: 150px;
-	border: 1px solid black;
 }
 
 .resume {
 	margin-left: 40%;
 	padding-top: 0;
 	height: 150px;
-	border: 1px solid black;
 }
 
 .resume h3 {
@@ -42,7 +40,6 @@ h3 a {
 .imgLogo {
 	width: 40%;
 	padding: 0;
-	border: 1px solid black;
 }
 
 td {

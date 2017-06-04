@@ -19,7 +19,6 @@
 
 	<ui:define name="sectionContent">
 		<h1>Available recipes</h1>
-		<h4>Click on recipe name to view details.</h4>
 		<p:dataGrid var="recipetmp" id="dataTable"
 			value="#{currentRecipeResearch.recipes}" columns="3" rows="12"
 			paginator="true"
@@ -60,7 +59,6 @@
 							<f:setPropertyActionListener value="#{recipetmp}"
 								target="#{currentRecipeResearch.selectedRecipe}" />
 						</p:commandButton>
-
 					</h3>
 
 				</h:panelGrid>
